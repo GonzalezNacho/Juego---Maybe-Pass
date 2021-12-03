@@ -5,18 +5,17 @@ public class Utilidades {
     public static boolean hayColision(
             int elemento1PosicionX, int elemento1PosicionY, int elemento1Ancho, int elemento1Largo,
             int elemento2PosicionX, int elemento2PosicionY, int elemento2Ancho, int elemento2Largo) {
-        if (
-            haySolapamientoDeRango(
+        boolean haySolapamientoEnX =  haySolapamientoDeRango(
                 elemento1PosicionX,
                 elemento1PosicionX+elemento1Ancho,
                 elemento2PosicionX,
-                elemento2PosicionX+elemento2Ancho)
-            &&     
-            haySolapamientoDeRango(
+                elemento2PosicionX+elemento2Ancho);
+        boolean haySolapamientoEnY = haySolapamientoDeRango(
                 elemento1PosicionY,
                 elemento1PosicionY+elemento1Largo,
                 elemento2PosicionY,
-                elemento2PosicionY+elemento2Largo)) {
+                elemento2PosicionY+elemento2Largo);
+    	if (haySolapamientoEnX &&  haySolapamientoEnY) {
             return true;
         }
         return false;

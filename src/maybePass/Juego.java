@@ -197,7 +197,25 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     
     private void verificarReboteEntreParedYninja() {
     	if (ninja.hayColision(pared)) {
-    		ninja.frenarEnEjeXPorDerecha();
+    		if (ninja.getVelocidadY() ==0) {
+    			if (ninja.getPosicionX() < pared.getPosicionX()) {
+        			System.out.println("deberia aparecer a la izquierda de la pared");
+        			ninja.setPosicionX(pared.getPosicionX()-ninja.getAncho()-1);
+        		}else {
+        			System.out.println("deberia aparecer a la derecha de la pared");
+        			//ninja.frenarEnEjeXPorDerecha();
+        			ninja.setPosicionX(pared.getPosicionX()+pared.getAncho()+1);
+        		}
+    		} else {
+    			if (ninja.getPosicionY() < pared.getPosicionY()) {
+        			System.out.println("velocidad Y: "+ ninja.getVelocidadY() );
+        			ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
+        		}else {
+        			System.out.println("velocidad Y: "+ ninja.getVelocidadY());
+        			//ninja.frenarEnEjeXPorDerecha();
+        			ninja.setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
+        		}
+    		}
     	}
     }
 
