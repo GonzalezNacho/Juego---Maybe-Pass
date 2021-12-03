@@ -45,6 +45,23 @@ public abstract class ElementoBasico implements Elemento {
             return false;
         }
     }
+	
+	public boolean hayColisionEnY(Elemento elemento) {
+        if (Utilidades.verificarColisionEnEjeY(
+            this.getPosicionX(),
+            this.getPosicionY(),
+            this.getAncho(),
+            this.getLargo(),
+            elemento.getPosicionX(),
+            elemento.getPosicionY(),
+            elemento.getAncho(),
+            elemento.getLargo())) {
+                return true;
+        } else {
+            return false;
+        }
+	}
+	
 
     public void moverse() {
         posicionX = posicionX + velocidadX;

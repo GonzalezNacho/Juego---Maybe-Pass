@@ -27,5 +27,36 @@ public class Utilidades {
         }
         return false;
     }
-
+    
+    public static boolean verificarColisionEnEjeY(
+            int elemento1PosicionX, int elemento1PosicionY, int elemento1Ancho, int elemento1Largo,
+            int elemento2PosicionX, int elemento2PosicionY, int elemento2Ancho, int elemento2Largo) {
+        int diferenciaDeSolapamientoEnX =  CalcularDiferenciaDeSolapamiento(
+                elemento1PosicionX,
+                elemento1Ancho,
+                elemento2PosicionX,
+                elemento2Ancho);
+        int diferenciaDeSolapamientoEnY = CalcularDiferenciaDeSolapamiento(
+                elemento1PosicionY,
+                elemento1Largo,
+                elemento2PosicionY,
+                elemento2Largo);
+    	if (diferenciaDeSolapamientoEnX >  diferenciaDeSolapamientoEnY) {
+            return true;     
+        }
+        return false;
+    }
+    
+    private static int CalcularDiferenciaDeSolapamiento (int a, int b, int c, int d) {
+    	if (a < c) {
+    		return (a + b)-c;
+    	} else {
+    		if(( a + b ) >(c + d)) {
+    			return (c + d) - a;
+    		} else {
+    			return b;
+    		}
+    	}
+    }
+    
 }

@@ -17,7 +17,6 @@ public class Ninja extends ElementoBasico {
     
     public void frenarEnEjeXPorDerecha() {
     	setPosicionX(getPosicionX()-10);
-    	System.out.println("correr a la derecha, x: " + getPosicionX());
     }
 
     public void frenarEnEjeYPorAbajo() {
