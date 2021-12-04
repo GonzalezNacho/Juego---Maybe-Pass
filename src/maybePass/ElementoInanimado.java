@@ -3,10 +3,10 @@ package maybePass;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Pared extends ElementoBasico {
+public class ElementoInanimado extends ElementoBasico {
 
     
-    public Pared(int posicionX, int posicionY , int ancho, int largo,
+    public ElementoInanimado(int posicionX, int posicionY , int ancho, int largo,
             Color color) {
         super(posicionX, posicionY,  ancho, largo, color);
     }

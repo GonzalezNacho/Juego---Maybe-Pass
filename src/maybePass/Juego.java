@@ -24,7 +24,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private int tiempoDeEsperaEntreActualizaciones;
     private ElementoBasico zonaSegura;
     private ElementoBasico ubicacionInicial;
-    private List<Pared> paredes;
+    private List<ElementoInanimado> paredes;
     private Ninja ninja;
     private Vidas vidas;
     private List<Enemigo> enemigos;
@@ -39,9 +39,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
         this.ninja = new Ninja(40, 40, 0, 0, 40, 40, Color.black);
-        this.zonaSegura = new ZonaSegura (anchoJuego -220, 70, 200, 350, Color.GREEN);
-        this.ubicacionInicial = new UbicacionInicial (25, 25, 200, 350, Color.red);
-        this.paredes = new ArrayList<Pared>();
+        this.zonaSegura = new ElementoInanimado (anchoJuego -220, 70, 200, 350, Color.GREEN);
+        this.ubicacionInicial = new ElementoInanimado (25, 25, 200, 350, Color.red);
+        this.paredes = new ArrayList<ElementoInanimado>();
         this.enemigos = new ArrayList<Enemigo>();
         this.vidas = new Vidas(10, 45, new Font("Arial", 8, 20), Color.blue, vidas);
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
@@ -201,15 +201,15 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     }*/
     
     private void dibujarParedes(Graphics g) {
-        for (Pared pared : paredes) {
+        for (ElementoInanimado pared : paredes) {
             pared.dibujarse(g);
         }
     }
     
     private void verificarReboteEntreParedYninja() {
-    	Iterator<Pared> iterador = paredes.iterator();
+    	Iterator<ElementoInanimado> iterador = paredes.iterator();
     	while (iterador.hasNext()) {
-    		Pared pared = iterador.next();
+    		ElementoInanimado pared = iterador.next();
     		if (ninja.hayColision(pared)) {
         		if (ninja.hayColisionEnY(pared)) {
         			if (ninja.getPosicionY() < pared.getPosicionY()) {
@@ -229,9 +229,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     }
     
     private void verificarReboteEnemigosContraParedesLaterales() {
-    	Iterator<Pared> iterador = paredes.iterator();
+    	Iterator<ElementoInanimado> iterador = paredes.iterator();
     	while (iterador.hasNext()) {
-    		Pared pared = iterador.next();
+    		ElementoInanimado pared = iterador.next();
     		for (Enemigo enemigo : enemigos) {
         		if (enemigo.hayColision(pared)) {
         			enemigo.rebotarEnEjeX();
@@ -310,27 +310,27 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     }
     
     private void agregarParedes() {
-    	agregaPared(new  Pared (20,20,5,400, Color.blue));
+    	agregaPared(new  ElementoInanimado (20,20,5,400, Color.blue));
     	//agregaPared(new  Pared (20,20,anchoJuego-35,5, Color.blue));
-    	agregaPared(new  Pared (20,20,200,5, Color.blue));
-    	agregaPared(new  Pared (270,70,5,305, Color.blue));
-    	agregaPared(new  Pared (270,70,400,5, Color.blue));
-    	agregaPared(new  Pared (670,20,5,55, Color.blue));
-    	agregaPared(new  Pared (670,20,315,5, Color.blue));
-    	agregaPared(new  Pared (730,70,55,5, Color.blue));
-    	agregaPared(new  Pared (730,70,5,305, Color.blue));
-    	agregaPared(new  Pared (220,20,5,350, Color.blue));
+    	agregaPared(new  ElementoInanimado (20,20,200,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (270,70,5,305, Color.blue));
+    	agregaPared(new  ElementoInanimado (270,70,400,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (670,20,5,55, Color.blue));
+    	agregaPared(new  ElementoInanimado (670,20,315,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (730,70,55,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (730,70,5,305, Color.blue));
+    	agregaPared(new  ElementoInanimado (220,20,5,350, Color.blue));
     	//agregaPared(new  Pared (20,420,anchoJuego-35,5, Color.blue));
-    	agregaPared(new  Pared (20,420,315,5, Color.blue));
-    	agregaPared(new  Pared (220,370,50,5, Color.blue));
-    	agregaPared(new  Pared (330,370,5,50, Color.blue));
-    	agregaPared(new  Pared (330,370,400,5, Color.blue));
-    	agregaPared(new  Pared (780,420,205,5, Color.blue));
-    	agregaPared(new  Pared (anchoJuego-20,20,5,400, Color.blue));
-    	agregaPared(new  Pared (anchoJuego-220,70,5,350, Color.blue));
+    	agregaPared(new  ElementoInanimado (20,420,315,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (220,370,50,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (330,370,5,50, Color.blue));
+    	agregaPared(new  ElementoInanimado (330,370,400,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (780,420,205,5, Color.blue));
+    	agregaPared(new  ElementoInanimado (anchoJuego-20,20,5,400, Color.blue));
+    	agregaPared(new  ElementoInanimado (anchoJuego-220,70,5,350, Color.blue));
 	}
 
-	private void agregaPared(Pared pared) {
+	private void agregaPared(ElementoInanimado pared) {
 		// TODO Auto-generated method stub
 		this.paredes.add(pared);
 	}
