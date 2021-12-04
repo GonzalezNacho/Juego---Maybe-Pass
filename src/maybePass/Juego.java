@@ -23,6 +23,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private int largoJuego;
     private int tiempoDeEsperaEntreActualizaciones;
     private ElementoBasico zonaSegura;
+    private ElementoBasico ubicacionInicial;
     private List<Pared> paredes;
     private Ninja ninja;
     private Vidas vidas;
@@ -38,7 +39,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
         this.ninja = new Ninja(40, 40, 0, 0, 40, 40, Color.black);
-        this.zonaSegura = new ZonaSegura (anchoJuego -220, 70, 200, 350, Color.GREEN); //anchoJuego-220,70,5,350
+        this.zonaSegura = new ZonaSegura (anchoJuego -220, 70, 200, 350, Color.GREEN);
+        this.ubicacionInicial = new UbicacionInicial (25, 25, 200, 350, Color.red);
         this.paredes = new ArrayList<Pared>();
         this.enemigos = new ArrayList<Enemigo>();
         this.vidas = new Vidas(10, 45, new Font("Arial", 8, 20), Color.blue, vidas);
@@ -124,7 +126,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     protected void paintComponent(Graphics g) {
         this.limpiarPantalla(g);
         zonaSegura.dibujarse(g);
-        //paredes.dibujarse(g);
+        ubicacionInicial.dibujarse(g);
         ninja.dibujarse(g);
         vidas.dibujarse(g);
         dibujarEnemigos(g);
@@ -174,7 +176,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         verificarReboteEnemigosContraParedesLaterales(); 
         verificarReboteEntreEnemigos();
         verificarColisionEntreEnemigoYninja();
-        //verificarFinDeJuego();
+        verificarFinDeJuego();
     }
 
     // Se iteran todos los enemigos y se verifica para cada enemigo si hay colision
@@ -256,24 +258,27 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         while (iterador.hasNext()) {
             Enemigo enemigo = iterador.next();
             if (enemigo.hayColision(ninja)) {
-                iterador.remove();
+                //iterador.remove();
                 vidas.perderVida();
+                ninja.volverALaPosicionInicial(ubicacionInicial);
             }
         }
     }
 
     // Se verifica si la cantidad de enemigos es 0 o si la cantidad de vidas es 0
     // para parar el juego
-    /*private void verificarFinDeJuego() {
+    private void verificarFinDeJuego() {
 
         if (vidas.getVidas() == 0) {
-            pantallaActual = PANTALLA_PERDEDOR;
+            //pantallaActual = PANTALLA_PERDEDOR;
+        	System.out.println("Perdiste");
         }
 
-        if (enemigos.size() == 0) {
-            pantallaActual = PANTALLA_GANADOR;
+        if (ninja.hayColision(zonaSegura)) {
+            //pantallaActual = PANTALLA_GANADOR;
+        	System.out.println("Ganaste");
         }
-    }*/
+    }
 
     // metodo para limpiar la pantalla
     private void limpiarPantalla(Graphics graphics) {

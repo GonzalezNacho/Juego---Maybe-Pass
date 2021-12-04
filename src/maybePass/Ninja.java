@@ -30,4 +30,9 @@ public class Ninja extends ElementoBasico {
     public void frenarEnEjeYPoArriba() {
     	setPosicionY(getPosicionY()+10);
     }
+    
+    public void volverALaPosicionInicial(ElementoBasico ubicacion) {
+    	setPosicionX(ubicacion.getPosicionX() + 10 );
+    	setPosicionY(ubicacion.getPosicionY() + 10 );
+    }
 }
