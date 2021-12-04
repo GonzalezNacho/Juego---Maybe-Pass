@@ -8,11 +8,11 @@ public class Launcher {
     public static void main(String[] args) {
 
         // Propiedades del Juego
-        int anchoVentana = 800;
+        int anchoVentana = 1000;
         int largoVentana = 600;
         int tiempoDeEsperaEntreActualizaciones = 5;
         int enemigosPorLinea = 1;
-        int filasDeEnemigos = 4;
+        int filasDeEnemigos = 7;
         int vidas = 3;
 
         // Activar aceleracion de graficos en 2 dimensiones

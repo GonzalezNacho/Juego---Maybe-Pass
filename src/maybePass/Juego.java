@@ -23,7 +23,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private int largoJuego;
     private int tiempoDeEsperaEntreActualizaciones;
     private ElementoBasico zonaSegura;
-    private ElementoBasico pared;
+    private List<Pared> paredes;
     private Ninja ninja;
     private Vidas vidas;
     private List<Enemigo> enemigos;
@@ -37,9 +37,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         int filasDeEnemigos, int vidas) {
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
-        this.ninja = new Ninja(30, largoJuego - 50, 0, 0, 40, 40, Color.black);
-        this.zonaSegura = new ZonaSegura (anchoJuego -50, 0, 50, 50, Color.GREEN);
-        this.pared = new  Pared (300,400,100,50, Color.blue);
+        this.ninja = new Ninja(40, 40, 0, 0, 40, 40, Color.black);
+        this.zonaSegura = new ZonaSegura (anchoJuego -220, 70, 200, 350, Color.GREEN); //anchoJuego-220,70,5,350
+        this.paredes = new ArrayList<Pared>();
         this.enemigos = new ArrayList<Enemigo>();
         this.vidas = new Vidas(10, 45, new Font("Arial", 8, 20), Color.blue, vidas);
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
@@ -50,11 +50,13 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
     private void inicializarJuego() {
         this.enemigos.clear();
-        this.vidas = new Vidas(10, 45, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
+        this.paredes.clear();
+        this.vidas = new Vidas(10, 500, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
         agregarEnemigos(enemigosPorLinea, filasDeEnemigos);
+        agregarParedes();
     }
 
-    @Override
+	@Override
     public Dimension getPreferredSize() {
         return new Dimension(anchoJuego, largoJuego);
     }
@@ -122,10 +124,11 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     protected void paintComponent(Graphics g) {
         this.limpiarPantalla(g);
         zonaSegura.dibujarse(g);
-        pared.dibujarse(g);
+        //paredes.dibujarse(g);
         ninja.dibujarse(g);
         vidas.dibujarse(g);
         dibujarEnemigos(g);
+        dibujarParedes(g);
     }
 
     // En este metodo se actualiza el estado de todos los elementos del juego
@@ -195,33 +198,55 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         }
     }*/
     
+    private void dibujarParedes(Graphics g) {
+        for (Pared pared : paredes) {
+            pared.dibujarse(g);
+        }
+    }
+    
     private void verificarReboteEntreParedYninja() {
-    	if (ninja.hayColision(pared)) {
-    		if (ninja.hayColisionEnY(pared)) {
-    			if (ninja.getPosicionY() < pared.getPosicionY()) {
-        			ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
-        		}else {
-        			ninja.setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
+    	Iterator<Pared> iterador = paredes.iterator();
+    	while (iterador.hasNext()) {
+    		Pared pared = iterador.next();
+    		if (ninja.hayColision(pared)) {
+        		if (ninja.hayColisionEnY(pared)) {
+        			if (ninja.getPosicionY() < pared.getPosicionY()) {
+            			ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
+            		}else {
+            			ninja.setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
+            		}
+        		} else {
+        			if (ninja.getPosicionX() < pared.getPosicionX()) {
+            			ninja.setPosicionX(pared.getPosicionX()-ninja.getAncho()-1);
+            		}else {
+            			ninja.setPosicionX(pared.getPosicionX()+pared.getAncho()+1);
+            		}
         		}
-    		} else {
-    			if (ninja.getPosicionX() < pared.getPosicionX()) {
-        			ninja.setPosicionX(pared.getPosicionX()-ninja.getAncho()-1);
-        		}else {
-        			ninja.setPosicionX(pared.getPosicionX()+pared.getAncho()+1);
-        		}
-    		}
+        	}
+    	}
+    }
+    
+    private void verificarReboteEnemigosContraParedesLaterales() {
+    	Iterator<Pared> iterador = paredes.iterator();
+    	while (iterador.hasNext()) {
+    		Pared pared = iterador.next();
+    		for (Enemigo enemigo : enemigos) {
+        		if (enemigo.hayColision(pared)) {
+        			enemigo.rebotarEnEjeX();
+            	}
+    		}	
     	}
     }
 
     // se verifica si hay colision de cada enemigo contra las paredes laterales, si
     // hay colision se cambia la direccion del enemigo en el eje X
-    private void verificarReboteEnemigosContraParedesLaterales() {
+    /*private void verificarReboteEnemigosContraParedesLaterales() {
         for (Enemigo enemigo : enemigos) {
             if (enemigo.getPosicionX() <= 0 || enemigo.getPosicionX() + enemigo.getAncho() >= anchoJuego) {
                 enemigo.rebotarEnEjeX();
             }
         }
-    }
+    }*/
 
     // se verifica si la pelota colisiona con cada uno de los enemigos. Si hay
     // colision se hace rebotar la pelota en el ejeY, se suma un punto y se toca el
@@ -269,14 +294,40 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         for (int x = 1; x <= enemigosPorLinea; x++) {
             for (int y = 1; y <= filasDeEnemigos; y++) {
             	if( y % 2 == 0) {
-            		agregarEnemigo(new EnemigoRedondo(1, 60 + y * 30, 1, 0, 20, 20, Color.white));
+            		agregarEnemigo(new EnemigoRedondo(anchoJuego/ 2, 60 + y * 40, -2, 0, 20, 20, Color.white));
             	}
             	else {
-            		agregarEnemigo(new EnemigoRedondo(anchoJuego - 20, 60 + y * 30, 1, 0, 20, 20, Color.red));
+            		agregarEnemigo(new EnemigoRedondo(anchoJuego / 2, 60 + y * 40, 2, 0, 20, 20, Color.red));
             	}
                 
             }
         }
     }
+    
+    private void agregarParedes() {
+    	agregaPared(new  Pared (20,20,5,400, Color.blue));
+    	//agregaPared(new  Pared (20,20,anchoJuego-35,5, Color.blue));
+    	agregaPared(new  Pared (20,20,200,5, Color.blue));
+    	agregaPared(new  Pared (270,70,5,305, Color.blue));
+    	agregaPared(new  Pared (270,70,400,5, Color.blue));
+    	agregaPared(new  Pared (670,20,5,55, Color.blue));
+    	agregaPared(new  Pared (670,20,315,5, Color.blue));
+    	agregaPared(new  Pared (730,70,55,5, Color.blue));
+    	agregaPared(new  Pared (730,70,5,305, Color.blue));
+    	agregaPared(new  Pared (220,20,5,350, Color.blue));
+    	//agregaPared(new  Pared (20,420,anchoJuego-35,5, Color.blue));
+    	agregaPared(new  Pared (20,420,315,5, Color.blue));
+    	agregaPared(new  Pared (220,370,50,5, Color.blue));
+    	agregaPared(new  Pared (330,370,5,50, Color.blue));
+    	agregaPared(new  Pared (330,370,400,5, Color.blue));
+    	agregaPared(new  Pared (780,420,205,5, Color.blue));
+    	agregaPared(new  Pared (anchoJuego-20,20,5,400, Color.blue));
+    	agregaPared(new  Pared (anchoJuego-220,70,5,350, Color.blue));
+	}
+
+	private void agregaPared(Pared pared) {
+		// TODO Auto-generated method stub
+		this.paredes.add(pared);
+	}
 
 }
