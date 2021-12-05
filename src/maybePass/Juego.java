@@ -27,36 +27,53 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private List<ElementoInanimado> paredes;
     private Ninja ninja;
     private Vidas vidas;
+    private Nivel nivel;
     private List<Enemigo> enemigos;
     //private int pantallaActual;
-    private int enemigosPorLinea;
-    private int filasDeEnemigos;
+    private int numeroNivel;
     private int cantidadVidas;
 
 
-    public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int enemigosPorLinea,
-        int filasDeEnemigos, int vidas) {
+    public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas) {
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
-        this.ninja = new Ninja(40, 40, 0, 0, 40, 40, Color.black);
-        this.zonaSegura = new ElementoInanimado (anchoJuego -220, 70, 200, 350, Color.GREEN);
-        this.ubicacionInicial = new ElementoInanimado (25, 25, 200, 350, Color.red);
+        this.ninja = new Ninja(0, 0, 0, 0, 40, 40, Color.black);
+        this.zonaSegura = new ElementoInanimado (0, 0, 0, 0, Color.GREEN);
+        this.ubicacionInicial = new ElementoInanimado (0, 0, 0, 0, Color.red);
         this.paredes = new ArrayList<ElementoInanimado>();
         this.enemigos = new ArrayList<Enemigo>();
         this.vidas = new Vidas(10, 45, new Font("Arial", 8, 20), Color.blue, vidas);
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
-        this.enemigosPorLinea = enemigosPorLinea;
-        this.filasDeEnemigos = filasDeEnemigos;
+        this.numeroNivel = numeroNivel;
         this.cantidadVidas = vidas;
+    }
+    
+    private void obtenerNivel() {
+    	if(numeroNivel ==1) {
+    		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
+    	}
     }
 
     private void inicializarJuego() {
         this.enemigos.clear();
         this.paredes.clear();
         this.vidas = new Vidas(10, 500, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
-        agregarEnemigos(enemigosPorLinea, filasDeEnemigos);
-        agregarParedes();
+        obtenerNivel();
+        obtenerDatosDelNivel(nivel);
+        //agregarEnemigos(enemigosPorLinea, filasDeEnemigos);
+        //agregarParedes();
+        
+        
     }
+    
+
+	private void obtenerDatosDelNivel(Nivel nivel) {
+		nivel.agregarEnemigos();
+    	nivel.agregarParedes();
+    	nivel.configurarZonaInicial();
+    	nivel.ubicarNinja();
+    	nivel.configurarZonaSegura();
+	}
 
 	@Override
     public Dimension getPreferredSize() {
@@ -136,7 +153,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     // En este metodo se actualiza el estado de todos los elementos del juego
     private void actualizarJuego() {
         verificarEstadoAmbiente();
-        //pelota.moverse();
         ninja.moverse();
         moverEnemigos();
     }
@@ -144,11 +160,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private void dibujarJuego() {
         this.repaint();
     }
-
-    public void agregarEnemigo(Enemigo enemigo) {
-        this.enemigos.add(enemigo);
-    }
-
 
 
     // se hace una iteracion de todos los enemigos cargados en la lista de enemigos
@@ -219,9 +230,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             		}
         		} else {
         			if (ninja.getPosicionX() < pared.getPosicionX()) {
-            			ninja.setPosicionX(pared.getPosicionX()-ninja.getAncho()-1);
+        				ninja.frenarEnEjeXPorDerecha();
             		}else {
-            			ninja.setPosicionX(pared.getPosicionX()+pared.getAncho()+1);
+            			ninja.frenarEnEjeXPorIzquierda();
             		}
         		}
         	}
@@ -258,7 +269,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         while (iterador.hasNext()) {
             Enemigo enemigo = iterador.next();
             if (enemigo.hayColision(ninja)) {
-                //iterador.remove();
                 vidas.perderVida();
                 ninja.volverALaPosicionInicial(ubicacionInicial);
             }
@@ -294,45 +304,4 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             throw new RuntimeException(e1);
         }
     }
-
-    private void agregarEnemigos(int enemigosPorLinea, int filasDeEnemigos) {
-        for (int x = 1; x <= enemigosPorLinea; x++) {
-            for (int y = 1; y <= filasDeEnemigos; y++) {
-            	if( y % 2 == 0) {
-            		agregarEnemigo(new EnemigoRedondo(anchoJuego/ 2, 60 + y * 40, -2, 0, 20, 20, Color.white));
-            	}
-            	else {
-            		agregarEnemigo(new EnemigoRedondo(anchoJuego / 2, 60 + y * 40, 2, 0, 20, 20, Color.red));
-            	}
-                
-            }
-        }
-    }
-    
-    private void agregarParedes() {
-    	agregaPared(new  ElementoInanimado (20,20,5,400, Color.blue));
-    	//agregaPared(new  Pared (20,20,anchoJuego-35,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (20,20,200,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (270,70,5,305, Color.blue));
-    	agregaPared(new  ElementoInanimado (270,70,400,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (670,20,5,55, Color.blue));
-    	agregaPared(new  ElementoInanimado (670,20,315,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (730,70,55,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (730,70,5,305, Color.blue));
-    	agregaPared(new  ElementoInanimado (220,20,5,350, Color.blue));
-    	//agregaPared(new  Pared (20,420,anchoJuego-35,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (20,420,315,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (220,370,50,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (330,370,5,50, Color.blue));
-    	agregaPared(new  ElementoInanimado (330,370,400,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (780,420,205,5, Color.blue));
-    	agregaPared(new  ElementoInanimado (anchoJuego-20,20,5,400, Color.blue));
-    	agregaPared(new  ElementoInanimado (anchoJuego-220,70,5,350, Color.blue));
-	}
-
-	private void agregaPared(ElementoInanimado pared) {
-		// TODO Auto-generated method stub
-		this.paredes.add(pared);
-	}
-
 }

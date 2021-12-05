@@ -11,8 +11,7 @@ public class Launcher {
         int anchoVentana = 1000;
         int largoVentana = 600;
         int tiempoDeEsperaEntreActualizaciones = 5;
-        int enemigosPorLinea = 1;
-        int filasDeEnemigos = 7;
+        int nivel = 1; 
         int vidas = 3;
 
         // Activar aceleracion de graficos en 2 dimensiones
@@ -31,8 +30,7 @@ public class Launcher {
         ventana.setVisible(true);
 
         // Crear un "Jpanel" llamado Juego y agregarlo a la ventana
-        Juego juego = new Juego(anchoVentana, largoVentana, tiempoDeEsperaEntreActualizaciones, enemigosPorLinea,
-                filasDeEnemigos, vidas);
+        Juego juego = new Juego(anchoVentana, largoVentana, tiempoDeEsperaEntreActualizaciones, nivel, vidas);
 
         // Agregar a la ventana el JComponent (Juego hereda de JComponent)
         ventana.add(juego);

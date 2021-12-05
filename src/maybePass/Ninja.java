@@ -16,19 +16,19 @@ public class Ninja extends ElementoBasico {
     }
     
     public void frenarEnEjeXPorDerecha() {
-    	setPosicionX(getPosicionX()-10);
+    	setPosicionX(getPosicionX()-1);
     }
 
     public void frenarEnEjeYPorAbajo() {
-    	setPosicionY(getPosicionY()-10);
+    	setPosicionY(getPosicionY()-1);
     }
     
     public void frenarEnEjeXPorIzquierda() {
-    	setPosicionX(getPosicionX()+10);
+    	setPosicionX(getPosicionX()+1);
     }
 
     public void frenarEnEjeYPoArriba() {
-    	setPosicionY(getPosicionY()+10);
+    	setPosicionY(getPosicionY()+1);
     }
     
     public void volverALaPosicionInicial(ElementoBasico ubicacion) {
