@@ -16,7 +16,7 @@ public class Ninja extends ElementoBasico {
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Paths.get(Ninja.class.getClassLoader().getResource("imagenes/idle.PNG").getPath())
+        String path = Paths.get(Ninja.class.getClassLoader().getResource("imagenes/ninja.PNG").getPath())
                 .toString();
         try {
             img = ImageIO.read(new File(path));
