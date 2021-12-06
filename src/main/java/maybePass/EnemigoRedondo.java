@@ -32,11 +32,6 @@ public class EnemigoRedondo extends Enemigo {
             throw new RuntimeException(e1);
         }
     }
-    
-    /*public void dibujarse(Graphics graphics) {
-        graphics.setColor(getColor());
-        graphics.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
-    }*/
 
     public void destruirse(Graphics graphics) {
         graphics.setColor(Color.red);
