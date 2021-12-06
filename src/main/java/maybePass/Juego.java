@@ -49,8 +49,10 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     }
     
     private void obtenerNivel() {
-    	if(numeroNivel ==1) {
+    	if (numeroNivel ==1) {
     		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
+    	}else if (numeroNivel ==2) {
+    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
     	}
     }
 
@@ -246,6 +248,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		for (Enemigo enemigo : enemigos) {
         		if (enemigo.hayColision(pared)) {
         			enemigo.rebotarEnEjeX();
+        			enemigo.rebotarEnEjeY();
             	}
     		}	
     	}

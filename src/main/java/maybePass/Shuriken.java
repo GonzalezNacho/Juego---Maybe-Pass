@@ -9,14 +9,14 @@ import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 
 
-public class EnemigoRedondo extends Enemigo {
+public class Shuriken extends Enemigo {
 	
 	private BufferedImage img1;
 	
-    public EnemigoRedondo(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
+    public Shuriken(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Paths.get(EnemigoRedondo.class.getClassLoader().getResource("imagenes/shuriken.PNG").getPath())
+        String path = Paths.get(Shuriken.class.getClassLoader().getResource("imagenes/shuriken.PNG").getPath())
                 .toString();
         try {
             img1 = ImageIO.read(new File(path));
