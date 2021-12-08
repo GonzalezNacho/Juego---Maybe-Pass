@@ -115,37 +115,36 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
     @Override
     public void keyPressed(KeyEvent arg0) {
-    	// si mantengo apretada la tecla de la derecha se asigna velocidad 1 a la ninja
-	    
-	 if (pantalla == PANTALLA_INICIO) {
+    	// si mantengo apretada la tecla de la derecha se asigna velocidad 1 al ninja
+    	if (pantalla == PANTALLA_INICIO && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
             inicializarJuego();
             pantalla = PANTALLA_JUEGO;
         }
 
-        if (pantalla == PANTALLA_PERDEDOR || pantalla == PANTALLA_GANADOR) {
+        if ((pantalla == PANTALLA_PERDEDOR && arg0.getKeyCode() == KeyEvent.VK_ENTER) || (pantalla == PANTALLA_GANADOR && arg0.getKeyCode() == KeyEvent.VK_ENTER)) {
             pantalla = PANTALLA_INICIO;
         }
+    	
+        if (pantalla == PANTALLA_JUEGO) {
 	    
-	if (pantalla == PANTALLA_JUEGO) {
-	    
-		if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
+        	if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
 		    ninja.setVelocidadX(1);
-		}
+        	}
 
-		if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-		    ninja.setVelocidadY(-1);
-		}
+        	if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+        		ninja.setVelocidadY(-1);
+        	}
 
-		if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-		    ninja.setVelocidadY(1);
-		}
+        	if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+        		ninja.setVelocidadY(1);
+        	}
 
-		// si mantengo apretada la tecla de la izquierda se asigna velocidad -1 a la
-		// ninja
-		if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-		    ninja.setVelocidadX(-1);
-		}
-	}
+        	// si mantengo apretada la tecla de la izquierda se asigna velocidad -1 a la
+        	// ninja
+        	if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
+        		ninja.setVelocidadX(-1);
+        	}
+        }
     }
 
     @Override
