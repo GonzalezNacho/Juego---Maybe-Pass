@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Nivel2  implements Nivel {
 
-	private int filasDeEnemigos;
-	private int enemigosPorLinea;
+	private int columnasDeEnemigos;
+	private int enemigosPorColumna;
 	//private int anchoJuego;
 	//private int largoJuego;
 	private Ninja ninja;
@@ -24,8 +24,8 @@ public class Nivel2  implements Nivel {
         this.zonaSegura = zonaSegura;
         this.paredes = paredes;
         this.enemigos = enemigos;
-        this.enemigosPorLinea = 1;
-        this.filasDeEnemigos= 14;
+        this.enemigosPorColumna = 1;
+        this.columnasDeEnemigos= 14;
 	}
 	@Override
 	public void agregarParedes() {
@@ -45,8 +45,8 @@ public class Nivel2  implements Nivel {
 
 	@Override
 	public void agregarEnemigos() {
-		for (int x = 1; x <= enemigosPorLinea; x++) {
-            for (int y = 1; y <= filasDeEnemigos; y++) {
+		for (int x = 1; x <= enemigosPorColumna; x++) {
+            for (int y = 1; y <= columnasDeEnemigos; y++) {
             	if( y % 2 == 0) {
    					agregarEnemigo(new Shuriken(180 + y * 41, 220, 0, 2, 20, 20, Color.white));
             	}

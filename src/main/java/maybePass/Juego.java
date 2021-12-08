@@ -53,6 +53,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
     	}else if (numeroNivel ==2) {
     		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
+    	}else if (numeroNivel ==3) {
+    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
     	}
     }
 
