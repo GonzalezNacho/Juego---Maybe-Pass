@@ -41,7 +41,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Pantalla perdiste;
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas) {
-	this.pantalla = PANTALLA_INICIO;
+    	this.pantalla = PANTALLA_INICIO;
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
         this.ninja = new Ninja(0, 0, 0, 0, 40, 40, Color.black);
@@ -53,7 +53,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
         this.numeroNivel = numeroNivel;
         this.cantidadVidas = vidas;
-        this.portada = new Pantalla(anchoJuego, largoJuego, "imagenes/portada.png");
+        this.portada = new Pantalla(anchoJuego, largoJuego, "imagenes/portada.PNG");
         this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
         this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
     }
@@ -322,13 +322,13 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private void verificarFinDeJuego() {
 
         if (vidas.getVidas() == 0) {
-            //pantallaActual = PANTALLA_PERDEDOR;
-        	System.out.println("Perdiste");
+            pantalla = PANTALLA_PERDEDOR;
+        	//System.out.println("Perdiste");
         }
 
         if (ninja.hayColision(zonaSegura)) {
-            //pantallaActual = PANTALLA_GANADOR;
-        	System.out.println("Ganaste");
+            pantalla = PANTALLA_GANADOR;
+        	//System.out.println("Ganaste");
         }
     }
 
