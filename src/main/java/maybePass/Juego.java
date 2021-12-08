@@ -17,7 +17,11 @@ import javax.swing.JPanel;
 // Implemento Runnable para crear un Thread que ejecute en paralelo con mi programa
 public class Juego extends JPanel implements KeyListener, Runnable {
 
-
+    private int pantalla;
+    private final static int PANTALLA_INICIO = 1;
+    private final static int PANTALLA_JUEGO = 2;
+    private final static int PANTALLA_PERDEDOR = 3;
+    private final static int PANTALLA_GANADOR = 4;
     private static final long serialVersionUID = 1L;
     private int anchoJuego;
     private int largoJuego;
@@ -32,9 +36,12 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     //private int pantallaActual;
     private int numeroNivel;
     private int cantidadVidas;
-
+    private Pantalla portada;
+    private Pantalla ganaste;
+    private Pantalla perdiste;
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas) {
+	this.pantalla = PANTALLA_INICIO;
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
         this.ninja = new Ninja(0, 0, 0, 0, 40, 40, Color.black);
@@ -46,6 +53,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
         this.numeroNivel = numeroNivel;
         this.cantidadVidas = vidas;
+        this.portada = new Pantalla(anchoJuego, largoJuego, "imagenes/portada.png");
+        this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
+        this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
     }
     
     private void obtenerNivel() {
@@ -95,7 +105,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     public void run() {
     	inicializarJuego();
         while (true) {
-            actualizarJuego();
+            if (pantalla == PANTALLA_JUEGO) {	
+		   actualizarJuego();
+	    }
             dibujarJuego();
             esperar(tiempoDeEsperaEntreActualizaciones);
         }
@@ -104,23 +116,36 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     @Override
     public void keyPressed(KeyEvent arg0) {
     	// si mantengo apretada la tecla de la derecha se asigna velocidad 1 a la ninja
-        if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-            ninja.setVelocidadX(1);
-        }
-        
-        if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-            ninja.setVelocidadY(-1);
-        }
-        
-        if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-            ninja.setVelocidadY(1);
+	    
+	 if (pantalla == PANTALLA_INICIO) {
+            inicializarJuego();
+            pantalla = PANTALLA_JUEGO;
         }
 
-        // si mantengo apretada la tecla de la izquierda se asigna velocidad -1 a la
-        // ninja
-        if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-            ninja.setVelocidadX(-1);
+        if (pantalla == PANTALLA_PERDEDOR || pantalla == PANTALLA_GANADOR) {
+            pantalla = PANTALLA_INICIO;
         }
+	    
+	if (pantalla == PANTALLA_JUEGO) {
+	    
+		if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
+		    ninja.setVelocidadX(1);
+		}
+
+		if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+		    ninja.setVelocidadY(-1);
+		}
+
+		if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
+		    ninja.setVelocidadY(1);
+		}
+
+		// si mantengo apretada la tecla de la izquierda se asigna velocidad -1 a la
+		// ninja
+		if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
+		    ninja.setVelocidadX(-1);
+		}
+	}
     }
 
     @Override
@@ -145,13 +170,25 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     // Aca se dibujan a todos los elementos, para ello cada elemento implementa el
     // metodo dibujarse
     protected void paintComponent(Graphics g) {
-        this.limpiarPantalla(g);
-        zonaSegura.dibujarse(g);
-        ubicacionInicial.dibujarse(g);
-        ninja.dibujarse(g);
-        vidas.dibujarse(g);
-        dibujarEnemigos(g);
-        dibujarParedes(g);
+    this.limpiarPantalla(g);
+	if (pantalla == PANTALLA_INICIO) {
+		portada.dibujarse(g);
+	}
+	if (pantalla == PANTALLA_PERDEDOR) {
+		perdiste.dibujarse(g);
+	}
+	if (pantalla == PANTALLA_JUEGO) {
+		super.paintComponent(g);
+	        zonaSegura.dibujarse(g);
+	        ubicacionInicial.dibujarse(g);
+	        ninja.dibujarse(g);
+	        vidas.dibujarse(g);
+	        dibujarEnemigos(g);
+	        dibujarParedes(g);
+	}
+	if (pantalla == PANTALLA_GANADOR) {
+		ganaste.dibujarse(g);
+	} 
     }
 
     // En este metodo se actualiza el estado de todos los elementos del juego
