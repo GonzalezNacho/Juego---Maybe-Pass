@@ -290,8 +290,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         if (ninja.hayColision(zonaSegura)) {
             //pantallaActual = PANTALLA_GANADOR;
         	System.out.println("Ganaste");
-		numeroNivel=2; 
-        	inicializarJuego();
         }
     }
 

@@ -7,7 +7,7 @@ public class Nivel3  implements Nivel {
 
 	private int filasDeEnemigos;
 	private int enemigosPorLinea;
-	private int anchoJuego;
+	//private int anchoJuego;
 	//private int largoJuego;
 	private Ninja ninja;
 	private ElementoBasico ubicacionInicial;
@@ -17,7 +17,7 @@ public class Nivel3  implements Nivel {
 	
 	
 	public Nivel3(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<ElementoInanimado> paredes) {
-		this.anchoJuego = anchoJuego;
+		//this.anchoJuego = anchoJuego;
         //this.largoJuego = largoJuego;
         this.ninja = ninja;
         this.ubicacionInicial = ubicacionInicial;
