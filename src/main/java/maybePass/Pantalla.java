@@ -7,13 +7,13 @@ import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
-public class PantallaImagen implements Dibujable {
+public class Pantalla implements Dibujable {
 
     protected BufferedImage img;
     protected int ancho;
     protected int largo;
 
-    public PantallaImagen(int ancho, int largo, String resource) {
+    public Pantalla(int ancho, int largo, String resource) {
         try {
             this.ancho = ancho;
             this.largo = largo;
