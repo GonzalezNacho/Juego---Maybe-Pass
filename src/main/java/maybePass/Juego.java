@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+
 // Implemento KeyListener para poder leer en los metodos keyPressed y keyReleased los codigos de tecla que apreto el usuario
 // Implemento Runnable para crear un Thread que ejecute en paralelo con mi programa
 public class Juego extends JPanel implements KeyListener, Runnable {
@@ -26,6 +27,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private static final long serialVersionUID = 1L;
     private int anchoJuego;
     private int largoJuego;
+    private Sonidos sonidos;
     private int tiempoDeEsperaEntreActualizaciones;
     private ElementoBasico zonaSegura;
     private ElementoBasico ubicacionInicial;
@@ -58,6 +60,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
         this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
         this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
+        cargarSonidos();
+        this.sonidos.repetirSonido("background");
     }
     
     private void obtenerNivel() {
@@ -145,7 +149,15 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         	}
         }
     }
-
+    
+    private void cargarSonidos() {
+        try {
+            sonidos = new Sonidos();
+            sonidos.agregarSonido("background", "sonidos/fondo.wav");
+        } catch (Exception e1) {
+            throw new RuntimeException(e1);
+        }
+    }
     @Override
     public void keyReleased(KeyEvent arg0) {
         // si suelto la tecla izquierda o la derecha se asigna velocidad 0 a la ninja en eje X
