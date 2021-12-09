@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-//import java.util.Random;
+
 
 import javax.swing.JPanel;
 
@@ -22,6 +22,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private final static int PANTALLA_JUEGO = 2;
     private final static int PANTALLA_PERDEDOR = 3;
     private final static int PANTALLA_GANADOR = 4;
+    private final static int PANTALLA_SIGUIENTE_NIVEL = 5;
     private static final long serialVersionUID = 1L;
     private int anchoJuego;
     private int largoJuego;
@@ -33,12 +34,13 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Vidas vidas;
     private Nivel nivel;
     private List<Enemigo> enemigos;
-    //private int pantallaActual;
     private int numeroNivel;
+    private int numeroNivelActual;
     private int cantidadVidas;
     private Pantalla portada;
     private Pantalla ganaste;
     private Pantalla perdiste;
+    private Pantalla siguienteNivel;
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas) {
     	this.pantalla = PANTALLA_INICIO;
@@ -56,6 +58,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.portada = new Pantalla(anchoJuego, largoJuego, "imagenes/portada.PNG");
         this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
         this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
+        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
     }
     
     private void obtenerNivel() {
@@ -69,15 +72,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     }
 
     private void inicializarJuego() {
-        this.enemigos.clear();
-        this.paredes.clear();
+    	numeroNivel = 1;
+    	crearNivel();
         this.vidas = new Vidas(10, 500, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
-        obtenerNivel();
-        obtenerDatosDelNivel(nivel);
-        //agregarEnemigos(enemigosPorLinea, filasDeEnemigos);
-        //agregarParedes();
-        
-        
     }
     
 
@@ -106,8 +103,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	inicializarJuego();
         while (true) {
             if (pantalla == PANTALLA_JUEGO) {	
-		   actualizarJuego();
-	    }
+            	actualizarJuego();
+            }
             dibujarJuego();
             esperar(tiempoDeEsperaEntreActualizaciones);
         }
@@ -115,9 +112,13 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
     @Override
     public void keyPressed(KeyEvent arg0) {
-    	// si mantengo apretada la tecla de la derecha se asigna velocidad 1 al ninja
+    	
     	if (pantalla == PANTALLA_INICIO && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
             inicializarJuego();
+            pantalla = PANTALLA_JUEGO;
+        }
+    	
+    	if (pantalla == PANTALLA_SIGUIENTE_NIVEL && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
             pantalla = PANTALLA_JUEGO;
         }
 
@@ -126,7 +127,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         }
     	
         if (pantalla == PANTALLA_JUEGO) {
-	    
+        	// si mantengo apretada la tecla de la derecha se asigna velocidad en X 1 al ninja
         	if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
 		    ninja.setVelocidadX(1);
         	}
@@ -139,8 +140,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         		ninja.setVelocidadY(1);
         	}
 
-        	// si mantengo apretada la tecla de la izquierda se asigna velocidad -1 a la
-        	// ninja
+        	// si mantengo apretada la tecla de la izquierda se asigna velocidad en x -1 al ninja
         	if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
         		ninja.setVelocidadX(-1);
         	}
@@ -169,25 +169,28 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     // Aca se dibujan a todos los elementos, para ello cada elemento implementa el
     // metodo dibujarse
     protected void paintComponent(Graphics g) {
-    this.limpiarPantalla(g);
-	if (pantalla == PANTALLA_INICIO) {
-		portada.dibujarse(g);
-	}
-	if (pantalla == PANTALLA_PERDEDOR) {
-		perdiste.dibujarse(g);
-	}
-	if (pantalla == PANTALLA_JUEGO) {
-		super.paintComponent(g);
+    	this.limpiarPantalla(g);
+    	if (pantalla == PANTALLA_INICIO) {
+    		portada.dibujarse(g);
+    	}
+    	if (pantalla == PANTALLA_PERDEDOR) {
+    		perdiste.dibujarse(g);
+    	}
+    	if (pantalla == PANTALLA_JUEGO) {
+    		super.paintComponent(g);
 	        zonaSegura.dibujarse(g);
 	        ubicacionInicial.dibujarse(g);
 	        ninja.dibujarse(g);
 	        vidas.dibujarse(g);
 	        dibujarEnemigos(g);
 	        dibujarParedes(g);
-	}
-	if (pantalla == PANTALLA_GANADOR) {
-		ganaste.dibujarse(g);
-	} 
+    	}
+    	if (pantalla == PANTALLA_GANADOR) {
+    		ganaste.dibujarse(g);
+    	}
+    	if (pantalla == PANTALLA_SIGUIENTE_NIVEL) {
+    		siguienteNivel.dibujarse(g);
+    	} 
     }
 
     // En este metodo se actualiza el estado de todos los elementos del juego
@@ -227,10 +230,25 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         verificarReboteEnemigosContraParedesLaterales(); 
         verificarReboteEntreEnemigos();
         verificarColisionEntreEnemigoYninja();
+        verificarCambioDeNivel();
         verificarFinDeJuego();
     }
 
-    // Se iteran todos los enemigos y se verifica para cada enemigo si hay colision
+    private void verificarCambioDeNivel() {
+		if (numeroNivel != numeroNivelActual) {
+			crearNivel();
+		}	
+	}
+
+	private void crearNivel() {
+		this.enemigos.clear();
+        this.paredes.clear();
+        numeroNivelActual = numeroNivel;
+        obtenerNivel();
+        obtenerDatosDelNivel(nivel);
+	}
+
+	// Se iteran todos los enemigos y se verifica para cada enemigo si hay colision
     // con cada enemigo. Si hay colision se ejecuta el metodo rebotarEnEjeX() del
     // enemigo esto hace que el enemigo cambie de direccion en el eje X
     private void verificarReboteEntreEnemigos() {
@@ -325,10 +343,15 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         	//System.out.println("Perdiste");
         }
 
-        if (ninja.hayColision(zonaSegura)) {
-            pantalla = PANTALLA_GANADOR;
+        if (ninja.hayColision(zonaSegura) && numeroNivel <= 3) {
+        	pantalla = PANTALLA_SIGUIENTE_NIVEL;
+        	numeroNivel++;
         	//System.out.println("Ganaste");
         }
+        
+       if (ninja.hayColision(zonaSegura) && numeroNivel == 4) {
+    	   pantalla = PANTALLA_GANADOR;
+       }
     }
 
     // metodo para limpiar la pantalla
