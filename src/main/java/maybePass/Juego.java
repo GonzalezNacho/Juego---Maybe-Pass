@@ -148,11 +148,12 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
     @Override
     public void keyReleased(KeyEvent arg0) {
-        // si suelto la tecla 39 o la 37 se asigna velocidad 0 a la ninja
+        // si suelto la tecla izquierda o la derecha se asigna velocidad 0 a la ninja en eje X
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT || arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             ninja.setVelocidadX(0);
         }
         
+        // si suelto la tecla abajo o arriba se asigna velocidad 0 a la ninja en eje Y
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN || arg0.getKeyCode() == KeyEvent.VK_UP) {
             ninja.setVelocidadY(0);
         }
@@ -265,7 +266,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		if (ninja.hayColision(pared)) {
         		if (ninja.hayColisionEnY(pared)) {
         			if (ninja.getPosicionY() < pared.getPosicionY()) {
-            			ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
+        				ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
             		}else {
             			ninja.setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
             		}
@@ -293,16 +294,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	}
     }
 
-    // se verifica si hay colision de cada enemigo contra las paredes laterales, si
-    // hay colision se cambia la direccion del enemigo en el eje X
-    /*private void verificarReboteEnemigosContraParedesLaterales() {
-        for (Enemigo enemigo : enemigos) {
-            if (enemigo.getPosicionX() <= 0 || enemigo.getPosicionX() + enemigo.getAncho() >= anchoJuego) {
-                enemigo.rebotarEnEjeX();
-            }
-        }
-    }*/
-
     // se verifica si la pelota colisiona con cada uno de los enemigos. Si hay
     // colision se hace rebotar la pelota en el ejeY, se suma un punto y se toca el
     // sonido toc
@@ -323,14 +314,12 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
         if (vidas.getVidas() == 0) {
             pantalla = PANTALLA_PERDEDOR;
-        	//System.out.println("Perdiste");
         }
 
         if (ninja.hayColision(zonaSegura) && numeroNivel <= 3) {
         	pantalla = PANTALLA_SIGUIENTE_NIVEL;
         	numeroNivel++;
         	crearNivel();
-        	//System.out.println("Ganaste");
         }
         
        if (ninja.hayColision(zonaSegura) && numeroNivel == 4) {
