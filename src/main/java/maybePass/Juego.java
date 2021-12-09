@@ -35,7 +35,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Nivel nivel;
     private List<Enemigo> enemigos;
     private int numeroNivel;
-    private int numeroNivelActual;
     private int cantidadVidas;
     private Pantalla portada;
     private Pantalla ganaste;
@@ -230,20 +229,12 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         verificarReboteEnemigosContraParedesLaterales(); 
         verificarReboteEntreEnemigos();
         verificarColisionEntreEnemigoYninja();
-        verificarCambioDeNivel();
         verificarFinDeJuego();
     }
-
-    private void verificarCambioDeNivel() {
-		if (numeroNivel != numeroNivelActual) {
-			crearNivel();
-		}	
-	}
 
 	private void crearNivel() {
 		this.enemigos.clear();
         this.paredes.clear();
-        numeroNivelActual = numeroNivel;
         obtenerNivel();
         obtenerDatosDelNivel(nivel);
 	}
@@ -260,14 +251,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             }
         }
     }
-
-    // se verifica si hay colision entre la ninja y la pelota. Si hay colision se
-    // cambia la direccion de la pelota en el eje Y
-   /* private void verificarReboteEntrePelotaYninja() {
-        if (ninja.hayColision(pelota)) {
-            pelota.rebotarEnEjeY();
-        }
-    }*/
     
     private void dibujarParedes(Graphics g) {
         for (ElementoInanimado pared : paredes) {
@@ -346,6 +329,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         if (ninja.hayColision(zonaSegura) && numeroNivel <= 3) {
         	pantalla = PANTALLA_SIGUIENTE_NIVEL;
         	numeroNivel++;
+        	crearNivel();
         	//System.out.println("Ganaste");
         }
         
