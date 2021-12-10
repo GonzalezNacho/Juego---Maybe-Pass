@@ -81,6 +81,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	numeroNivel = 1;
     	crearNivel();
         this.vidas = new Vidas(10, 500, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
+        //player.play("RUTA DE LA MUSICA");
     }
     
 
