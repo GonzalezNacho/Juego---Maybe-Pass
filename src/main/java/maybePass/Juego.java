@@ -345,6 +345,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (enemigo.hayColision(ninja)) {
                 vidas.perderVida();
                 ninja.volverALaPosicionInicial(ubicacionInicial);
+                sonidos.tocarSonido("death");
             }
         }
     }
@@ -356,6 +357,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (moneda.hayColision(ninja)) {
                 monedasTexto.ganarMonedas();
                 moneda.destroy();
+                sonidos.tocarSonido("moneda");
             }
         }
     }
@@ -366,15 +368,13 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
         if (vidas.getVidas() == 0) {
             pantalla = PANTALLA_PERDEDOR;
-        	//System.out.println("Perdiste");
         }
 
         if (ninja.hayColision(zonaSegura) && numeroNivel <= 3) {
         	pantalla = PANTALLA_SIGUIENTE_NIVEL;
         	numeroNivel++;
         	crearNivel();
-        	//player.play("/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/sonidos/victory.wav");
-        	//System.out.println("Ganaste");
+        	sonidos.tocarSonido("victory");
         }
         
        if (ninja.hayColision(zonaSegura) && numeroNivel == 4) {
