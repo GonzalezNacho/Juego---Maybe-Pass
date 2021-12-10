@@ -41,6 +41,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Pantalla perdiste;
     private Pantalla siguienteNivel;
     private Monedas monedasTexto;
+    private List<Moneda> monedas;
 
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas, int cantidadMonedas) {
@@ -60,16 +61,17 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.ganaste = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/ganaste.png");
         this.perdiste = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/perdiste.png");
         this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/siguiente-nivel.png");
+        this.monedas = new ArrayList<Moneda>();
         this.monedasTexto = new Monedas(100, 500, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
     }
     
     private void obtenerNivel() {
     	if (numeroNivel ==1) {
-    		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
+    		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas,  paredes);
     	}else if (numeroNivel ==2) {
-    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,paredes);
+    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  monedas,paredes);
     	}else if (numeroNivel ==3) {
-    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, paredes);
+    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes);
     	}
     }
 
@@ -118,11 +120,13 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	if (pantalla == PANTALLA_INICIO && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
             inicializarJuego();
             pantalla = PANTALLA_JUEGO;
+            nivel.agregarMonedas();
     		System.out.println("moneddaa");
         }
     	
     	if (pantalla == PANTALLA_SIGUIENTE_NIVEL && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
             pantalla = PANTALLA_JUEGO;
+            nivel.agregarMonedas();
         }
 
         if ((pantalla == PANTALLA_PERDEDOR && arg0.getKeyCode() == KeyEvent.VK_ENTER) || (pantalla == PANTALLA_GANADOR && arg0.getKeyCode() == KeyEvent.VK_ENTER)) {
@@ -187,6 +191,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 	        vidas.dibujarse(g);
 	        monedasTexto.dibujarse(g);
 	        dibujarEnemigos(g);
+	        dibujarMonedas(g);
 	        dibujarParedes(g);
     	}
     	if (pantalla == PANTALLA_GANADOR) {
@@ -246,6 +251,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
 	private void crearNivel() {
 		this.enemigos.clear();
+		this.monedas.clear();
         this.paredes.clear();
         obtenerNivel();
         obtenerDatosDelNivel(nivel);

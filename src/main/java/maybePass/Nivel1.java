@@ -14,9 +14,11 @@ public class Nivel1  implements Nivel {
 	private ElementoBasico zonaSegura;
 	private List<ElementoInanimado> paredes;
 	private List<Enemigo> enemigos;
+	private List<Moneda> monedas;
 	
 	
-	public Nivel1(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<ElementoInanimado> paredes) {
+	public Nivel1(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes) {
+		this.monedas = monedas;
 		this.anchoJuego = anchoJuego;
         //this.largoJuego = largoJuego;
         this.ninja = ninja;
@@ -93,6 +95,10 @@ public class Nivel1  implements Nivel {
 	@Override
 	public void agregarEnemigo(Enemigo enemigo) {
 		this.enemigos.add(enemigo);
+	}
+	@Override
+	public void agregarMoneda(Moneda moneda) {
+		this.monedas.add(moneda);
 	}
 	@Override
 	public void agregaPared(ElementoInanimado pared) {
