@@ -318,22 +318,17 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		ElementoInanimado pared = iterador.next();
     		for (Enemigo enemigo : enemigos) {
         		if (enemigo.hayColision(pared)) {
-        			enemigo.rebotarEnEjeX();
-        			enemigo.rebotarEnEjeY();
+        			if (enemigo.hayColisionEnY(pared)) {
+        				enemigo.rebotarEnEjeY();
+        			} else {
+        				enemigo.rebotarEnEjeX();
+        			}	
             	}
     		}	
     	}
     }
 
-    // se verifica si hay colision de cada enemigo contra las paredes laterales, si
-    // hay colision se cambia la direccion del enemigo en el eje X
-    /*private void verificarReboteEnemigosContraParedesLaterales() {
-        for (Enemigo enemigo : enemigos) {
-            if (enemigo.getPosicionX() <= 0 || enemigo.getPosicionX() + enemigo.getAncho() >= anchoJuego) {
-                enemigo.rebotarEnEjeX();
-            }
-        }
-    }*/
+    
 
     // se verifica si la pelota colisiona con cada uno de los enemigos. Si hay
     // colision se hace rebotar la pelota en el ejeY, se suma un punto y se toca el
