@@ -11,7 +11,7 @@ public class Launcher {
         int anchoVentana = 1000;
         int largoVentana = 600;
         int tiempoDeEsperaEntreActualizaciones = 5;
-        int nivel = 1; 
+        int nivel = 2; 
         int vidas = 3;
 
         // Activar aceleracion de graficos en 2 dimensiones
