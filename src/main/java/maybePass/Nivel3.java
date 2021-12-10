@@ -78,7 +78,9 @@ public class Nivel3  implements Nivel {
 	
 	@Override
 	public void agregarMonedas() {
-
+		agregarMoneda(new Moneda(50, 475, 0, 0, 20, 20, Color.white));
+		agregarMoneda(new Moneda(325, 375, 0, 0, 20, 20, Color.white));
+		agregarMoneda(new Moneda(860, 375, 0, 0, 20, 20, Color.white));
 	}
 
 	@Override
