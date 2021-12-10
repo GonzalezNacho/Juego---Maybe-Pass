@@ -245,6 +245,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         verificarReboteEnemigosContraParedesLaterales(); 
         verificarReboteEntreEnemigos();
         verificarColisionEntreEnemigoYninja();
+        verificarColisionEntreMonedaYninja();
         verificarFinDeJuego();
     }
 
@@ -330,6 +331,17 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (enemigo.hayColision(ninja)) {
                 vidas.perderVida();
                 ninja.volverALaPosicionInicial(ubicacionInicial);
+            }
+        }
+    }
+    
+    private void verificarColisionEntreMonedaYninja() {
+        Iterator<Moneda> iterador = monedas.iterator();
+        while (iterador.hasNext()) {
+            Moneda moneda = iterador.next();
+            if (moneda.hayColision(ninja)) {
+                monedasTexto.ganarMonedas();
+                moneda.destroy();
             }
         }
     }
