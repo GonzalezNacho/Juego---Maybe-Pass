@@ -42,6 +42,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Pantalla siguienteNivel;
     private Monedas monedasTexto;
     private List<Moneda> monedas;
+    private simpleSoundPlayer player;
 
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas, int cantidadMonedas) {
@@ -63,6 +64,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/siguiente-nivel.png");
         this.monedas = new ArrayList<Moneda>();
         this.monedasTexto = new Monedas(100, 500, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
+        player = new simpleSoundPlayer();
     }
     
     private void obtenerNivel() {
@@ -331,6 +333,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (enemigo.hayColision(ninja)) {
                 vidas.perderVida();
                 ninja.volverALaPosicionInicial(ubicacionInicial);
+                player.play("C:\\Code\\Java\\2Juego---Maybe-Pass\\src\\main\\resources\\sonidos\\death.wav");
             }
         }
     }
@@ -342,6 +345,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (moneda.hayColision(ninja)) {
                 monedasTexto.ganarMonedas();
                 moneda.destroy();
+                player.play("C:\\Code\\Java\\2Juego---Maybe-Pass\\src\\main\\resources\\sonidos\\coin.wav");
             }
         }
     }
@@ -359,6 +363,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         	pantalla = PANTALLA_SIGUIENTE_NIVEL;
         	numeroNivel++;
         	crearNivel();
+        	player.play("C:\\Code\\Java\\2Juego---Maybe-Pass\\src\\main\\resources\\sonidos\\victory.wav");
         	//System.out.println("Ganaste");
         }
         
