@@ -18,6 +18,7 @@ public class Pantalla implements Dibujable {
             this.ancho = ancho;
             this.largo = largo;
             String path = Paths.get(Pantalla.class.getClassLoader().getResource(resource).toURI()).toString();
+            System.out.println("Working Directory = " + System.getProperty("user.dir")+ path);
             this.img = ImageIO.read(new File(path));
         } catch (Exception e1) {
             throw new RuntimeException(e1);
