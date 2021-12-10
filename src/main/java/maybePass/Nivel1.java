@@ -54,10 +54,10 @@ public class Nivel1  implements Nivel {
 		for (int x = 1; x <= enemigosPorLinea; x++) {
             for (int y = 1; y <= filasDeEnemigos; y++) {
             	if( y % 2 == 0) {
-   					agregarEnemigo(new Shuriken(anchoJuego/ 2, 60 + y * 40, -1, 0, 20, 20, Color.white));
+   					agregarEnemigo(new Shuriken(anchoJuego/ 2, 60 + y * 40, -2, 0, 20, 20, Color.white));
             	}
             	else {
-            		agregarEnemigo(new Shuriken(anchoJuego / 2, 60 + y * 40, 1, 0, 20, 20, Color.red));
+            		agregarEnemigo(new Shuriken(anchoJuego / 2, 60 + y * 40, 2, 0, 20, 20, Color.red));
             	}
                 
             }

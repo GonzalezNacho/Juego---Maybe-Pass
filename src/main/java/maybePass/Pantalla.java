@@ -17,7 +17,7 @@ public class Pantalla implements Dibujable {
         try {
             this.ancho = ancho;
             this.largo = largo;
-            String path ="/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/portada.PNG";
+            String path = Paths.get(Pantalla.class.getClassLoader().getResource(resource).toURI()).toString();
             this.img = ImageIO.read(new File(path));
         } catch (Exception e1) {
             throw new RuntimeException(e1);

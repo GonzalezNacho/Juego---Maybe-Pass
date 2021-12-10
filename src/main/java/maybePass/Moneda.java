@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -15,7 +16,8 @@ public class Moneda extends ElementoBasico {
     public Moneda(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path ="/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/moneda.png";
+        String path = Paths.get(Shuriken.class.getClassLoader().getResource("imagenes/moneda.png").getPath())
+                .toString();
         try {
             img1 = ImageIO.read(new File(path));
         } catch (IOException e) {
