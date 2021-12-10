@@ -73,7 +73,7 @@ public class Nivel3  implements Nivel {
             }
         }
 	}
-
+	
 	@Override
 	public void ubicarNinja() {
 		ninja.setPosicionX(130);
