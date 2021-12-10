@@ -16,8 +16,7 @@ public class Ninja extends ElementoBasico {
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Paths.get(Ninja.class.getClassLoader().getResource("imagenes/ninja.PNG").getPath())
-                .toString();
+        String path = "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/ninja.PNG";
         try {
             img = ImageIO.read(new File(path));
         } catch (IOException e) {
@@ -45,7 +44,7 @@ public class Ninja extends ElementoBasico {
     	setPosicionX(getPosicionX()+1);
     }
 
-    public void frenarEnEjeYPorArriba() {
+    public void frenarEnEjeYPoArriba() {
     	setPosicionY(getPosicionY()+1);
     }
     

@@ -15,7 +15,6 @@ public class Nivel3  implements Nivel {
 	private List<ElementoInanimado> paredes;
 	private List<Enemigo> enemigos;
 	
-	
 	public Nivel3(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<ElementoInanimado> paredes) {
 		//this.anchoJuego = anchoJuego;
         //this.largoJuego = largoJuego;

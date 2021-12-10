@@ -13,6 +13,7 @@ public class Launcher {
         int tiempoDeEsperaEntreActualizaciones = 5;
         int nivel = 1; 
         int vidas = 3;
+        int cantidadMonedas = 0;
 
         // Activar aceleracion de graficos en 2 dimensiones
         System.setProperty("sun.java2d.opengl", "true");
@@ -30,7 +31,7 @@ public class Launcher {
         ventana.setVisible(true);
 
         // Crear un "Jpanel" llamado Juego y agregarlo a la ventana
-        Juego juego = new Juego(anchoVentana, largoVentana, tiempoDeEsperaEntreActualizaciones, nivel, vidas);
+        Juego juego = new Juego(anchoVentana, largoVentana, tiempoDeEsperaEntreActualizaciones, nivel, vidas, cantidadMonedas);
 
         // Agregar a la ventana el JComponent (Juego hereda de JComponent)
         ventana.add(juego);

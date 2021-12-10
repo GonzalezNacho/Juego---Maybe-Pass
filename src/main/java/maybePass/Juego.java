@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+import javax.sound.sampled.*;
 import javax.swing.JPanel;
-
 
 // Implemento KeyListener para poder leer en los metodos keyPressed y keyReleased los codigos de tecla que apreto el usuario
 // Implemento Runnable para crear un Thread que ejecute en paralelo con mi programa
@@ -27,7 +26,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private static final long serialVersionUID = 1L;
     private int anchoJuego;
     private int largoJuego;
-    private Sonidos sonidos;
     private int tiempoDeEsperaEntreActualizaciones;
     private ElementoBasico zonaSegura;
     private ElementoBasico ubicacionInicial;
@@ -42,8 +40,10 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Pantalla ganaste;
     private Pantalla perdiste;
     private Pantalla siguienteNivel;
+    private Monedas monedasTexto;
+	
 
-    public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas) {
+    public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas, int cantidadMonedas) {
     	this.pantalla = PANTALLA_INICIO;
         this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
@@ -56,21 +56,20 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
         this.numeroNivel = numeroNivel;
         this.cantidadVidas = vidas;
-        this.portada = new Pantalla(anchoJuego, largoJuego, "imagenes/portada.PNG");
-        this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
-        this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
-        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
-        cargarSonidos();
-        this.sonidos.repetirSonido("background");
+        this.portada = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/portada.PNG");
+        this.ganaste = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/ganaste.png");
+        this.perdiste = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/perdiste.png");
+        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/siguiente-nivel.png");
+        this.monedasTexto = new Monedas(100, 500, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
     }
     
     private void obtenerNivel() {
     	if (numeroNivel ==1) {
     		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
     	}else if (numeroNivel ==2) {
-    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
+    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,paredes);
     	}else if (numeroNivel ==3) {
-    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  paredes);
+    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, paredes);
     	}
     }
 
@@ -119,6 +118,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	if (pantalla == PANTALLA_INICIO && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
             inicializarJuego();
             pantalla = PANTALLA_JUEGO;
+    		System.out.println("moneddaa");
         }
     	
     	if (pantalla == PANTALLA_SIGUIENTE_NIVEL && arg0.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -149,23 +149,14 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         	}
         }
     }
-    
-    private void cargarSonidos() {
-        try {
-            sonidos = new Sonidos();
-            sonidos.agregarSonido("background", "sonidos/fondo.wav");
-        } catch (Exception e1) {
-            throw new RuntimeException(e1);
-        }
-    }
+
     @Override
     public void keyReleased(KeyEvent arg0) {
-        // si suelto la tecla izquierda o la derecha se asigna velocidad 0 a la ninja en eje X
+        // si suelto la tecla 39 o la 37 se asigna velocidad 0 a la ninja
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT || arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             ninja.setVelocidadX(0);
         }
         
-        // si suelto la tecla abajo o arriba se asigna velocidad 0 a la ninja en eje Y
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN || arg0.getKeyCode() == KeyEvent.VK_UP) {
             ninja.setVelocidadY(0);
         }
@@ -194,6 +185,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 	        ubicacionInicial.dibujarse(g);
 	        ninja.dibujarse(g);
 	        vidas.dibujarse(g);
+	        monedasTexto.dibujarse(g);
 	        dibujarEnemigos(g);
 	        dibujarParedes(g);
     	}
@@ -210,6 +202,12 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         verificarEstadoAmbiente();
         ninja.moverse();
         moverEnemigos();
+    }
+    
+    private void dibujarMonedas(Graphics g) {
+        for (Moneda moneda : monedas) {
+            moneda.dibujarse(g);
+        }
     }
 
     private void dibujarJuego() {
@@ -242,6 +240,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         verificarReboteEnemigosContraParedesLaterales(); 
         verificarReboteEntreEnemigos();
         verificarColisionEntreEnemigoYninja();
+        verificarColisionEntreMonedaYninja();
         verificarFinDeJuego();
     }
 
@@ -278,7 +277,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		if (ninja.hayColision(pared)) {
         		if (ninja.hayColisionEnY(pared)) {
         			if (ninja.getPosicionY() < pared.getPosicionY()) {
-        				ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
+            			ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
             		}else {
             			ninja.setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
             		}
@@ -306,6 +305,16 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	}
     }
 
+    // se verifica si hay colision de cada enemigo contra las paredes laterales, si
+    // hay colision se cambia la direccion del enemigo en el eje X
+    /*private void verificarReboteEnemigosContraParedesLaterales() {
+        for (Enemigo enemigo : enemigos) {
+            if (enemigo.getPosicionX() <= 0 || enemigo.getPosicionX() + enemigo.getAncho() >= anchoJuego) {
+                enemigo.rebotarEnEjeX();
+            }
+        }
+    }*/
+
     // se verifica si la pelota colisiona con cada uno de los enemigos. Si hay
     // colision se hace rebotar la pelota en el ejeY, se suma un punto y se toca el
     // sonido toc
@@ -326,12 +335,14 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
         if (vidas.getVidas() == 0) {
             pantalla = PANTALLA_PERDEDOR;
+        	//System.out.println("Perdiste");
         }
 
         if (ninja.hayColision(zonaSegura) && numeroNivel <= 3) {
         	pantalla = PANTALLA_SIGUIENTE_NIVEL;
         	numeroNivel++;
         	crearNivel();
+        	//System.out.println("Ganaste");
         }
         
        if (ninja.hayColision(zonaSegura) && numeroNivel == 4) {

@@ -5,7 +5,7 @@ public interface Nivel {
 	public void agregarParedes();
 	
 	public void agregarEnemigos();
-	
+		
 	public void ubicarNinja();
 	
 	public void configurarZonaInicial();
@@ -15,6 +15,6 @@ public interface Nivel {
 	public void agregarEnemigo(Enemigo enemigo);
 	
 	public void agregaPared(ElementoInanimado pared);
-	
+		
 	//public void ubicarMonedas();
 }

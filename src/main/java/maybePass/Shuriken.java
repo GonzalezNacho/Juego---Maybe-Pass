@@ -16,8 +16,7 @@ public class Shuriken extends Enemigo {
     public Shuriken(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Paths.get(Shuriken.class.getClassLoader().getResource("imagenes/shuriken.PNG").getPath())
-                .toString();
+        String path ="/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/shuriken.PNG";
         try {
             img1 = ImageIO.read(new File(path));
         } catch (IOException e) {
