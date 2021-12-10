@@ -50,10 +50,10 @@ public class Nivel2  implements Nivel {
 		for (int x = 1; x <= enemigosPorColumna; x++) {
             for (int y = 1; y <= columnasDeEnemigos; y++) {
             	if( y % 2 == 0) {
-   					agregarEnemigo(new Shuriken(180 + y * 41, 220, 0, 1.5, 20, 20, Color.white));
+   					agregarEnemigo(new Shuriken(180 + y * 41, 220, 0, 1, 20, 20, Color.white));
             	}
             	else {
-            		agregarEnemigo(new Shuriken(180 + y * 41, 220, 0, -1.5, 20, 20, Color.red));
+            		agregarEnemigo(new Shuriken(180 + y * 41, 220, 0, -1, 20, 20, Color.red));
             	}
                 
             }

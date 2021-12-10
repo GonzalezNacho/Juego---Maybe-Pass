@@ -16,7 +16,7 @@ public class Ninja extends ElementoBasico {
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/ninja.PNG";
+        String path = "/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/ninja.PNG";
         try {
             img = ImageIO.read(new File(path));
         } catch (IOException e) {

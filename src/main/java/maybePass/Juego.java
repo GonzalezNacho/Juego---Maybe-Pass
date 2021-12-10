@@ -58,10 +58,10 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
         this.numeroNivel = numeroNivel;
         this.cantidadVidas = vidas;
-        this.portada = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/portada.PNG");
-        this.ganaste = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/ganaste.png");
-        this.perdiste = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/perdiste.png");
-        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/siguiente-nivel.png");
+        this.portada = new Pantalla(anchoJuego, largoJuego, "/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/portada.PNG");
+        this.ganaste = new Pantalla(anchoJuego, largoJuego, "/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/ganaste.png");
+        this.perdiste = new Pantalla(anchoJuego, largoJuego, "/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/perdiste.png");
+        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/siguiente-nivel.png");
         this.monedas = new ArrayList<Moneda>();
         this.monedasTexto = new Monedas(100, 500, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
         player = new simpleSoundPlayer();
@@ -334,7 +334,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (enemigo.hayColision(ninja)) {
                 vidas.perderVida();
                 ninja.volverALaPosicionInicial(ubicacionInicial);
-                player.play("C:\\Code\\Java\\2Juego---Maybe-Pass\\src\\main\\resources\\sonidos\\death.wav");
+                player.play("/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/sonidos/death.wav");
             }
         }
     }
@@ -346,7 +346,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (moneda.hayColision(ninja)) {
                 monedasTexto.ganarMonedas();
                 moneda.destroy();
-                player.play("C:\\Code\\Java\\2Juego---Maybe-Pass\\src\\main\\resources\\sonidos\\coin.wav");
+                player.play("/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/sonidos/coin.wav");
             }
         }
     }
@@ -364,7 +364,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         	pantalla = PANTALLA_SIGUIENTE_NIVEL;
         	numeroNivel++;
         	crearNivel();
-        	player.play("C:\\Code\\Java\\2Juego---Maybe-Pass\\src\\main\\resources\\sonidos\\victory.wav");
+        	player.play("/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/sonidos/victory.wav");
         	//System.out.println("Ganaste");
         }
         

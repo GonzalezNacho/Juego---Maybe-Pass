@@ -15,7 +15,7 @@ public class Moneda extends ElementoBasico {
     public Moneda(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path ="/C:/Code/Java/2Juego---Maybe-Pass/src/main/resources/imagenes/moneda.png";
+        String path ="/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/imagenes/moneda.png";
         try {
             img1 = ImageIO.read(new File(path));
         } catch (IOException e) {
