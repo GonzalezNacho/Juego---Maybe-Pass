@@ -42,7 +42,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Pantalla siguienteNivel;
     private Monedas monedasTexto;
     private List<Moneda> monedas;
-    //private simpleSoundPlayer player;
+    private Sonidos sonidos;
 
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas, int cantidadMonedas) {
@@ -64,7 +64,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
         this.monedas = new ArrayList<Moneda>();
         this.monedasTexto = new Monedas(100, 500, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
-        //player = new simpleSoundPlayer();
+        cargarSonidos();
+        this.sonidos.repetirSonido("background");
     }
     
     private void obtenerNivel() {
@@ -80,8 +81,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private void inicializarJuego() {
     	numeroNivel = 1;
     	crearNivel();
+    	monedasTexto.reiniciarContadorDeMonedas();
         this.vidas = new Vidas(10, 500, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
-        //player.play("RUTA DE LA MUSICA");
     }
     
 
@@ -238,7 +239,19 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             enemigo.dibujarse(g);
         }
     }
-
+    
+    private void cargarSonidos() {
+        try {
+            sonidos = new Sonidos();
+            sonidos.agregarSonido("background", "sonidos/fondo.wav");
+            sonidos.agregarSonido("moneda", "sonidos/coin.wav");
+            sonidos.agregarSonido("victory", "sonidos/victory.wav");
+            sonidos.agregarSonido("death", "sonidos/death.wav");
+        } catch (Exception e1) {
+            throw new RuntimeException(e1);
+        }
+    }
+    
     // En este metodo verifico las colisiones, los rebotes de la pelota contra las
     // paredes, la colision entre enemigos y el fin de juego
     private void verificarEstadoAmbiente() {
@@ -332,7 +345,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (enemigo.hayColision(ninja)) {
                 vidas.perderVida();
                 ninja.volverALaPosicionInicial(ubicacionInicial);
-               // player.play("/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/sonidos/death.wav");
             }
         }
     }
@@ -344,7 +356,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             if (moneda.hayColision(ninja)) {
                 monedasTexto.ganarMonedas();
                 moneda.destroy();
-                //player.play("/C:/Users/jony/Documents/GitHub/JuegoConverso/Juego---Maybe-Pass/src/main/resources/sonidos/coin.wav");
             }
         }
     }

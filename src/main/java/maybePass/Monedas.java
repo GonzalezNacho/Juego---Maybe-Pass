@@ -29,6 +29,10 @@ public class Monedas {
     public void ganarMonedas() {
     	monedas++;
     }
+    
+    public void reiniciarContadorDeMonedas() {
+    	monedas = 0;
+    }
 
     public int getMonedas() {
     	return monedas;
