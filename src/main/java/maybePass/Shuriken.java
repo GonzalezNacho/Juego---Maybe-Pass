@@ -14,6 +14,7 @@ public class Shuriken extends Enemigo {
 	private BufferedImage img1;
 	private BufferedImage img2;
     private BufferedImage img3;
+    private BufferedImage img4;
     private int contador;
 	
     public Shuriken(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
@@ -26,6 +27,7 @@ public class Shuriken extends Enemigo {
             img1 = ImageIO.read(new File(path));
             img2 = rotarImagen(img1, 45);
             img3 = rotarImagen(img1, 22);
+            img4 = rotarImagen(img1, 68);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -34,19 +36,23 @@ public class Shuriken extends Enemigo {
     public void dibujarse(Graphics graphics) {
         try {
         	 contador++;
-             if (contador ==20) {
+             if (contador ==40) {
             	 contador = 0;
              }
              
-             if (0 <= contador && contador < 5) {
+             if (0 <= contador && contador < 10) {
                  graphics.drawImage(img1, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
              }
-             if ((5 <= contador  && contador < 10) ||(15 <= contador  && contador <= 20)) {
+             if (10 <= contador  && contador < 20) {
                  graphics.drawImage(img3, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
              }
             
-             if (10 <= contador  && contador < 15) {
+             if (20 <= contador  && contador < 30) {
                  graphics.drawImage(img2, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+             }
+             
+             if (30 <= contador  && contador <= 40) {
+            	 graphics.drawImage(img4, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
              }
         	//graphics.drawImage(img1, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
         } catch (Exception e1) {
