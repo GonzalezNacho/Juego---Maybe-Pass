@@ -1,5 +1,8 @@
 package maybePass;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+
 public class Utilidades {
     
     public static boolean hayColision(
@@ -57,6 +60,21 @@ public class Utilidades {
     			return b;
     		}
     	}
+    }
+    
+    public static String obtenerRuta(String pathRelativoDesdeResources) {
+    	boolean esLinux = System.getProperty("os.name").equals("Linux");
+    	String ruta = "";
+    	if (esLinux) {
+    		try {
+				ruta = Paths.get(Pantalla.class.getClassLoader().getResource(pathRelativoDesdeResources).toURI()).toString();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+    	} else {
+    		ruta = System.getProperty("user.dir") + "/src/main/resources/" + pathRelativoDesdeResources;
+    	}
+    	return ruta;
     }
     
 }
