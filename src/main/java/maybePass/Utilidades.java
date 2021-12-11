@@ -3,6 +3,8 @@ package maybePass;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
+
+
 public class Utilidades {
     
     public static boolean hayColision(
@@ -67,7 +69,7 @@ public class Utilidades {
     	String ruta = "";
     	if (esLinux) {
     		try {
-				ruta = Paths.get(Pantalla.class.getClassLoader().getResource(pathRelativoDesdeResources).toURI()).toString();
+				ruta = Paths.get(ElementoBasico.class.getClassLoader().getResource(pathRelativoDesdeResources).toURI()).toString();
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
@@ -76,5 +78,4 @@ public class Utilidades {
     	}
     	return ruta;
     }
-    
 }

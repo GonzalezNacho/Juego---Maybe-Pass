@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
+//import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 
 
@@ -16,8 +16,9 @@ public class Ninja extends ElementoBasico {
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Paths.get(Ninja.class.getClassLoader().getResource("imagenes/ninja.PNG").getPath())
-                .toString();
+        //String path = Paths.get(Ninja.class.getClassLoader().getResource("imagenes/ninja.PNG").getPath())
+        //        .toString();
+        String path = Utilidades.obtenerRuta("imagenes/ninja.PNG");
         try {
             img = ImageIO.read(new File(path));
         } catch (IOException e) {
