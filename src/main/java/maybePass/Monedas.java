@@ -23,7 +23,7 @@ public class Monedas implements Dibujable{
     public void dibujarse(Graphics g) {
         g.setColor(color);
         g.setFont(font);
-        g.drawString("Monedas: " + String.valueOf(monedas), posicionX, posicionY);
+        g.drawString("Monedas: " + String.valueOf(monedas), posicionX=150, posicionY=580);
     }
 
     public void ganarMonedas() {
