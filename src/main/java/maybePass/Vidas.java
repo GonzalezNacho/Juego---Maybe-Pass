@@ -23,7 +23,7 @@ public class Vidas implements Dibujable {
     public void dibujarse(Graphics g) {
         g.setColor(color);
         g.setFont(font);
-        g.drawString("Vidas: " + String.valueOf(vidas), posicionX, posicionY);
+        g.drawString("Vidas: " + String.valueOf(vidas), posicionX, posicionY=580);
     }
 
     public void perderVida() {
