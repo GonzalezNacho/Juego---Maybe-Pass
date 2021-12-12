@@ -15,6 +15,9 @@ public class Ninja extends ElementoConImagen {
 	private BufferedImage imgWalk1;
 	private BufferedImage imgWalk2;
 	private BufferedImage imgWalk3;
+	private BufferedImage imgWalk1izq;
+	private BufferedImage imgWalk2izq;
+	private BufferedImage imgWalk3izq;
 	private int contador;
 
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
@@ -26,11 +29,17 @@ public class Ninja extends ElementoConImagen {
         String pathWalk1 = Utilidades.obtenerRuta("imagenes/walk1.PNG");
         String pathWalk2 = Utilidades.obtenerRuta("imagenes/walk2.PNG");
         String pathWalk3 = Utilidades.obtenerRuta("imagenes/walk3.PNG");
+        String pathWalk1izq = Utilidades.obtenerRuta("imagenes/walk1izq.PNG");
+        String pathWalk2izq = Utilidades.obtenerRuta("imagenes/walk2izq.PNG");
+        String pathWalk3izq = Utilidades.obtenerRuta("imagenes/walk3izq.PNG");
         try {
         	img = ImageIO.read(new File(path));
         	imgWalk1 = ImageIO.read(new File(pathWalk1));
         	imgWalk2 = ImageIO.read(new File(pathWalk2));
         	imgWalk3 = ImageIO.read(new File(pathWalk3));
+        	imgWalk1izq = ImageIO.read(new File(pathWalk1izq));
+        	imgWalk2izq = ImageIO.read(new File(pathWalk2izq));
+        	imgWalk3izq = ImageIO.read(new File(pathWalk3izq));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -47,14 +56,26 @@ public class Ninja extends ElementoConImagen {
                 }
                 
                 if (0 <= contador && contador < 10) {
-                    graphics.drawImage(imgWalk1, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                    if (getVelocidadX() == -1) {
+                    	graphics.drawImage(imgWalk1izq, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                    } else {
+                    	graphics.drawImage(imgWalk1, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                    }	
                 }
                 if (10 <= contador  && contador < 20) {
-                    graphics.drawImage(imgWalk2, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                	if (getVelocidadX() == -1) {
+                		graphics.drawImage(imgWalk2izq, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                	} else {
+                		graphics.drawImage(imgWalk2, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                	}
                 }
                
                 if (20 <= contador  && contador < 30) {
-                    graphics.drawImage(imgWalk3, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                	if (getVelocidadX() == -1) {
+                		graphics.drawImage(imgWalk3izq, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                	} else {
+                		graphics.drawImage(imgWalk3, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+                	}
                 }
             }
         	
