@@ -3,7 +3,7 @@ package maybePass;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Enemigo extends ElementoBasico {
+public abstract class Enemigo extends ElementoConImagen {
 
     public Enemigo(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {

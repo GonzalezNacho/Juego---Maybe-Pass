@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Moneda extends ElementoBasico {
+public class Moneda extends ElementoConImagen {
 
 	private BufferedImage img1;
 	

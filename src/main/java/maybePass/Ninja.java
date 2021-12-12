@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-public class Ninja extends ElementoBasico {
+public class Ninja extends ElementoConImagen {
 	
 	private BufferedImage img;
 

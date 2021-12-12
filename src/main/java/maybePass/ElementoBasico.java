@@ -1,8 +1,8 @@
 package maybePass;
 
 import java.awt.Color;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+//import java.awt.*;
+//import java.awt.image.BufferedImage;
 
 public abstract class ElementoBasico implements Elemento {
 
@@ -64,24 +64,6 @@ public abstract class ElementoBasico implements Elemento {
         }
 	}
 	
-	
-
-	public BufferedImage rotarImagen(BufferedImage imageToRotate, int grados) {
-		int widthOfImage = imageToRotate.getWidth();
-		int heightOfImage = imageToRotate.getHeight();
-		int typeOfImage = imageToRotate.getType();
-
-		BufferedImage newImageFromBuffer = new BufferedImage(widthOfImage, heightOfImage, typeOfImage);
-
-		Graphics2D graphics2D = newImageFromBuffer.createGraphics();
-
-		graphics2D.rotate(Math.toRadians(grados), widthOfImage / 2, heightOfImage / 2);
-		graphics2D.drawImage(imageToRotate, null, 0, 0);
-
-		return newImageFromBuffer;
-	}
-	
-
     public void moverse() {
         posicionX = posicionX + velocidadX;
         posicionY = posicionY + velocidadY;
