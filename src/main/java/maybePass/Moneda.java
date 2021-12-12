@@ -37,10 +37,5 @@ public class Moneda extends ElementoBasico {
     public void destruirse(Graphics graphics) {
         graphics.setColor(Color.red);
         graphics.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
-    }
-    
-    public void destroy(){
-    	setPosicionY(-1000);
-    }
-    
+    }  
 }

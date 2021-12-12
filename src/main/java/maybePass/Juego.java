@@ -351,7 +351,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             Moneda moneda = iterador.next();
             if (moneda.hayColision(ninja)) {
                 monedasTexto.ganarMonedas();
-                moneda.destroy();
+                iterador.remove();
                 sonidos.tocarSonido("moneda");
             }
         }
