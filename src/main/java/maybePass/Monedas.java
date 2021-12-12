@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Monedas {
+public class Monedas implements Dibujable{
 	
 	private int posicionX;
     private int posicionY;
