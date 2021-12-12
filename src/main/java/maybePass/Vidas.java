@@ -25,6 +25,12 @@ public class Vidas implements Dibujable {
         g.setFont(font);
         g.drawString("Vidas: " + String.valueOf(vidas), posicionX, posicionY=580);
     }
+    
+    public void puntajeDibujarse(Graphics g) {
+        g.setColor(color);
+        g.setFont(font);
+        g.drawString("Moriste " + String.valueOf(3-vidas) + " veces", posicionX, posicionY=580);
+    }
 
     public void perderVida() {
         vidas--;
