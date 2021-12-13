@@ -63,7 +63,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
         this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
         this.monedas = new ArrayList<Moneda>();
-        this.monedasTexto = new Monedas(100, 500, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
+        this.monedasTexto = new Monedas(150, 580, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
         cargarSonidos();
         this.sonidos.repetirSonido("background");
     }
@@ -82,7 +82,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	numeroNivel = 1;
     	crearNivel();
     	monedasTexto.reiniciarContadorDeMonedas();
-        this.vidas = new Vidas(10, 500, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
+        this.vidas = new Vidas(10, 580, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
     }
     
 
@@ -198,8 +198,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	}
     	if (pantalla == PANTALLA_GANADOR) {
     		ganaste.dibujarse(g);
-		vidas.puntajeDibujarse(g);
-    		monedasTexto.puntajeDibujarse(g);
+    		vidas.puntajeDibujarse(g);
+    		monedasTexto.puntajeDibujarse(g,300,580);
     	}
     	if (pantalla == PANTALLA_SIGUIENTE_NIVEL) {
     		siguienteNivel.dibujarse(g);

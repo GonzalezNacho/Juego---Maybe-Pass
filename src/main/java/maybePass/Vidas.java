@@ -23,13 +23,13 @@ public class Vidas implements Dibujable {
     public void dibujarse(Graphics g) {
         g.setColor(color);
         g.setFont(font);
-        g.drawString("Vidas: " + String.valueOf(vidas), posicionX, posicionY=580);
+        g.drawString("Vidas: " + String.valueOf(vidas), posicionX, posicionY);
     }
     
     public void puntajeDibujarse(Graphics g) {
         g.setColor(color);
         g.setFont(font);
-        g.drawString("Moriste " + String.valueOf(3-vidas) + " veces", posicionX, posicionY=580);
+        g.drawString("Moriste " + String.valueOf(3-vidas) + " veces", posicionX, posicionY);
     }
 
     public void perderVida() {
