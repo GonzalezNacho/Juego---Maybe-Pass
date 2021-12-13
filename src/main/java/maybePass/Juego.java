@@ -82,6 +82,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	crearNivel();
     	monedasTexto.reiniciarContadorDeMonedas();
         this.vidas = new Vidas(10, 580, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
+    	
     }
 
 	private void obtenerDatosDelNivel(Nivel nivel) {
@@ -187,6 +188,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		super.paintComponent(g);
 	        zonaSegura.dibujarse(g);
 	        ubicacionInicial.dibujarse(g);
+    		nivel.dibujarFondo(g);
 	        ninja.dibujarse(g);
 	        vidas.dibujarse(g);
 	        monedasTexto.dibujarse(g);

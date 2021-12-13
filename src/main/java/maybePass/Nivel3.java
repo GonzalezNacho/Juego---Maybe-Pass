@@ -1,6 +1,7 @@
 package maybePass;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.List;
 
 public class Nivel3  implements Nivel {
@@ -115,6 +116,11 @@ public class Nivel3  implements Nivel {
 	@Override
 	public void agregaPared(ElementoInanimado pared) {
 		this.paredes.add(pared);
+	}
+	@Override
+	public void dibujarFondo(Graphics graphics) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

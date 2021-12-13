@@ -1,7 +1,7 @@
 package maybePass;
 
 import java.awt.Color;
-//import java.awt.*;
+
 //import java.awt.image.BufferedImage;
 
 public abstract class ElementoBasico implements Elemento {
@@ -13,6 +13,7 @@ public abstract class ElementoBasico implements Elemento {
     private int ancho;
     private int largo;
     private Color color;
+    
 
     public ElementoBasico(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color) {
         this.posicionX = posicionX;
@@ -132,5 +133,7 @@ public abstract class ElementoBasico implements Elemento {
     public void setColor(Color color) {
         this.color = color;
     }
+
+
 
 }

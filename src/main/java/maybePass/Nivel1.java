@@ -1,26 +1,33 @@
 package maybePass;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Nivel1  implements Nivel {
 
 	private int filasDeEnemigos;
 	private int enemigosPorLinea;
 	private int anchoJuego;
-	//private int largoJuego;
+	private int largoJuego;
 	private Ninja ninja;
 	private ElementoBasico ubicacionInicial;
 	private ElementoBasico zonaSegura;
 	private List<ElementoInanimado> paredes;
 	private List<Enemigo> enemigos;
 	private List<Moneda> monedas;
+	private BufferedImage img;
 	
 	
 	public Nivel1(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes) {
 		this.monedas = monedas;
 		this.anchoJuego = anchoJuego;
-        //this.largoJuego = largoJuego;
+        this.largoJuego = largoJuego;
         this.ninja = ninja;
         this.ubicacionInicial = ubicacionInicial;
         this.zonaSegura = zonaSegura;
@@ -28,6 +35,12 @@ public class Nivel1  implements Nivel {
         this.enemigos = enemigos;
         this.enemigosPorLinea = 1;
         this.filasDeEnemigos= 7;
+        String path = Utilidades.obtenerRuta("imagenes/nivelUno.png");
+        try {
+        	img = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 	}
 	@Override
 	public void agregarParedes() {
@@ -103,6 +116,10 @@ public class Nivel1  implements Nivel {
 	@Override
 	public void agregaPared(ElementoInanimado pared) {
 		this.paredes.add(pared);
+	}
+	
+	public void dibujarFondo(Graphics graphics) {
+		graphics.drawImage(img, 0, 0, anchoJuego, largoJuego, null);
 	}
 
 }

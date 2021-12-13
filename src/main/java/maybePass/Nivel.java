@@ -1,5 +1,7 @@
 package maybePass;
 
+import java.awt.Graphics;
+
 public interface Nivel {
 	
 	public void agregarParedes();
@@ -21,4 +23,5 @@ public interface Nivel {
 	public void agregarMoneda(Moneda moneda);
 	
 	//public void ubicarMonedas();
+	public void dibujarFondo(Graphics graphics);
 }
