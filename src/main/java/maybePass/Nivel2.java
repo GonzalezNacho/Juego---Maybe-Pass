@@ -2,26 +2,32 @@ package maybePass;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Nivel2  implements Nivel {
 
 	private int columnasDeEnemigos;
 	private int enemigosPorColumna;
-	//private int anchoJuego;
-	//private int largoJuego;
+	private int anchoJuego;
+	private int largoJuego;
 	private Ninja ninja;
 	private ElementoBasico ubicacionInicial;
 	private ElementoBasico zonaSegura;
 	private List<ElementoInanimado> paredes;
 	private List<Enemigo> enemigos;
 	private List<Moneda> monedas;
+	private BufferedImage img;
 	
 	
 	public Nivel2(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes) {
 		this.monedas = monedas;
-		//this.anchoJuego = anchoJuego;
-        //this.largoJuego = largoJuego;
+		this.anchoJuego = anchoJuego;
+        this.largoJuego = largoJuego;
         this.ninja = ninja;
         this.ubicacionInicial = ubicacionInicial;
         this.zonaSegura = zonaSegura;
@@ -29,6 +35,12 @@ public class Nivel2  implements Nivel {
         this.enemigos = enemigos;
         this.enemigosPorColumna = 1;
         this.columnasDeEnemigos= 14;
+        String path = Utilidades.obtenerRuta("imagenes/nivelDos.png");
+        try {
+        	img = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 	}
 	@Override
 	public void agregarParedes() {
@@ -103,8 +115,7 @@ public class Nivel2  implements Nivel {
 	}
 	@Override
 	public void dibujarFondo(Graphics graphics) {
-		// TODO Auto-generated method stub
-		
+		graphics.drawImage(img, 0, 0, anchoJuego, largoJuego, null);
 	}
 
 }
