@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//import javax.sound.sampled.*;
 import javax.swing.JPanel;
 
 // Implemento KeyListener para poder leer en los metodos keyPressed y keyReleased los codigos de tecla que apreto el usuario
@@ -84,7 +83,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	monedasTexto.reiniciarContadorDeMonedas();
         this.vidas = new Vidas(10, 580, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
     }
-    
 
 	private void obtenerDatosDelNivel(Nivel nivel) {
 		nivel.agregarEnemigos();
