@@ -2,10 +2,13 @@ package maybePass;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+//import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+
 
 
 
@@ -86,11 +89,13 @@ public class Utilidades {
     // probando cargar fuente
     public static Font cargarFuente() {
     	Font fuente = null;
-    	InputStream entradeBytes = ClassLoader.class.getResourceAsStream("fuentes/NinjaLine.ttf");
+    	String path = "src/main/resources/fuentes/lastninja.ttf";
     	try {
-			fuente = Font.createFont(Font.TRUETYPE_FONT,entradeBytes).deriveFont(12);
+			fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(20f);	
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(path)));	
 			return fuente;
-		} catch (FontFormatException e) {
+    	} catch (FontFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -42,6 +42,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     private Monedas monedasTexto;
     private List<Moneda> monedas;
     private Sonidos sonidos;
+    private Font fuente;
 
 
     public Juego(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int numeroNivel, int vidas, int cantidadMonedas) {
@@ -61,8 +62,9 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
         this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
         this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
+        this.fuente = Utilidades.cargarFuente();
         this.monedas = new ArrayList<Moneda>();
-        this.monedasTexto = new Monedas(150, 580, new Font("Arial", 8, 20), Color.blue, cantidadMonedas);
+        this.monedasTexto = new Monedas(190, 580, fuente, Color.blue, cantidadMonedas);
         cargarSonidos();
         this.sonidos.repetirSonido("background");
     }
@@ -81,8 +83,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	numeroNivel = 1;
     	crearNivel();
     	monedasTexto.reiniciarContadorDeMonedas();
-        this.vidas = new Vidas(10, 580, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
-    	
+        //this.vidas = new Vidas(10, 580, new Font("Arial", 8, 20), Color.blue, cantidadVidas);
+    	this.vidas = new Vidas(10, 580,fuente, Color.blue, cantidadVidas);
     }
 
 	private void obtenerDatosDelNivel(Nivel nivel) {
