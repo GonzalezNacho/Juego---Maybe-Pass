@@ -2,7 +2,6 @@ package maybePass;
 
 import java.awt.Color;
 
-//import java.awt.image.BufferedImage;
 
 public abstract class ElementoBasico implements Elemento {
 

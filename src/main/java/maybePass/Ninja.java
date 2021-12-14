@@ -23,8 +23,6 @@ public class Ninja extends ElementoConImagen {
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        //String path = Paths.get(Ninja.class.getClassLoader().getResource("imagenes/ninja.PNG").getPath())
-        //        .toString();
         String path = Utilidades.obtenerRuta("imagenes/ninja.PNG");
         String pathWalk1 = Utilidades.obtenerRuta("imagenes/walk1.PNG");
         String pathWalk2 = Utilidades.obtenerRuta("imagenes/walk2.PNG");

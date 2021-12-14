@@ -5,12 +5,8 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
-//import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
-
-
-
 
 
 public class Utilidades {
@@ -86,7 +82,7 @@ public class Utilidades {
     	}
     	return ruta;
     }
-    // probando cargar fuente
+    
     public static Font cargarFuente() {
     	Font fuente = null;
     	String path = "src/main/resources/fuentes/lastninja.ttf";
@@ -100,8 +96,6 @@ public class Utilidades {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	
     	return null;
     }
 }
