@@ -198,7 +198,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     	if (pantalla == PANTALLA_GANADOR) {
     		ganaste.dibujarse(g);
     		vidas.puntajeDibujarse(g);
-    		monedasTexto.puntajeDibujarse(g,300,580);
+    		monedasTexto.puntajeDibujarse(g,500,580);
     	}
     	if (pantalla == PANTALLA_SIGUIENTE_NIVEL) {
     		siguienteNivel.dibujarse(g);
