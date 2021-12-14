@@ -27,7 +27,7 @@ public class Vidas implements Dibujable {
     }
     
     public void puntajeDibujarse(Graphics g) {
-        g.setColor(color);
+        g.setColor(Color.BLACK);
         g.setFont(font);
         g.drawString("Moriste " + String.valueOf(3-vidas) + " veces", posicionX, posicionY);
     }

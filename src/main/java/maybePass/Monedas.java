@@ -29,9 +29,9 @@ public class Monedas implements Dibujable{
     }
 	
     public void puntajeDibujarse(Graphics g, int posicionX, int posicionY) {
-        g.setColor(color);
+        g.setColor(Color.BLACK);
         g.setFont(font);
-        g.drawString("Recolectaste " + String.valueOf(monedas) + "de 9" + " monedas", posicionX, posicionY);
+        g.drawString("Recolectaste " + String.valueOf(monedas) + " de 9 monedas", posicionX, posicionY);
     }
 
     public void ganarMonedas() {
