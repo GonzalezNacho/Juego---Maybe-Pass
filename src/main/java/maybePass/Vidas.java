@@ -29,7 +29,13 @@ public class Vidas implements Dibujable {
     public void puntajeDibujarse(Graphics g) {
         g.setColor(Color.BLACK);
         g.setFont(font);
-        g.drawString("Moriste " + String.valueOf(3-vidas) + " veces", posicionX, posicionY);
+        if(vidas==5) {
+        	g.drawString("No moriste!", posicionX, posicionY);
+        }else if(vidas==4) {
+        	g.drawString("Moriste 1 vez", posicionX, posicionY);
+        }else {
+        	g.drawString("Moriste " + String.valueOf(5-vidas) + " veces", posicionX, posicionY);
+        }
     }
 
     public void perderVida() {
