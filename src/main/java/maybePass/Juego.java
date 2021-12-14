@@ -80,7 +80,6 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     }
 
     private void inicializarJuego() {
-    	numeroNivel = 1;
     	crearNivel();
     	monedasTexto.reiniciarContadorDeMonedas();
     	this.vidas = new Vidas(10, 580,fuente, Color.blue, cantidadVidas);
@@ -352,8 +351,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
             Moneda moneda = iterador.next();
             if (moneda.hayColision(ninja)) {
                 monedasTexto.ganarMonedas();
-                iterador.remove();
                 sonidos.tocarSonido("moneda");
+                iterador.remove();
             }
         }
     }
@@ -364,6 +363,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 
         if (vidas.getVidas() == 0) {
             pantalla = PANTALLA_PERDEDOR;
+            numeroNivel = 1;
         }
 
         if (ninja.hayColision(zonaSegura) && numeroNivel <= 2) {
@@ -375,6 +375,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         
        if (ninja.hayColision(zonaSegura) && numeroNivel == 3) {
     	   pantalla = PANTALLA_GANADOR;
+    	   numeroNivel = 1;
        }
     }
 
