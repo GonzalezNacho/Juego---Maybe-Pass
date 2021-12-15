@@ -86,16 +86,17 @@ public class Ninja extends ElementoConImagen {
     	setPosicionX(getPosicionX()-1);
     }
 
-    public void frenarEnEjeYPorAbajo() {
-    	setPosicionY(getPosicionY()-1);
+    public void frenarEnEjeYPorAbajo(ElementoInanimado pared) {
+    	//setPosicionY(getPosicionY()-1);
+    	setPosicionY(pared.getPosicionY()- getLargo()-1);
     }
     
     public void frenarEnEjeXPorIzquierda() {
     	setPosicionX(getPosicionX()+1);
     }
 
-    public void frenarEnEjeYPoArriba() {
-    	setPosicionY(getPosicionY()+1);
+    public void frenarEnEjeYPorArriba(ElementoInanimado pared) {
+    	setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
     }
     
     public void volverALaPosicionInicial(ElementoBasico ubicacion) {
