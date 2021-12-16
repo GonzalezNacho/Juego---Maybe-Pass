@@ -87,7 +87,6 @@ public class Ninja extends ElementoConImagen {
     }
 
     public void frenarEnEjeYPorAbajo(ElementoInanimado pared) {
-    	//setPosicionY(getPosicionY()-1);
     	setPosicionY(pared.getPosicionY()- getLargo()-1);
     }
     

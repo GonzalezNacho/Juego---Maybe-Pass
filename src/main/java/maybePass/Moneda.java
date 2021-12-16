@@ -16,8 +16,6 @@ public class Moneda extends ElementoConImagen {
     public Moneda(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        //String path = Paths.get(Shuriken.class.getClassLoader().getResource("imagenes/moneda.png").getPath())
-        //        .toString();
         String path = Utilidades.obtenerRuta("imagenes/moneda.png");
         try {
             img1 = ImageIO.read(new File(path));
@@ -34,8 +32,4 @@ public class Moneda extends ElementoConImagen {
         }
     }
 
-    public void destruirse(Graphics graphics) {
-        graphics.setColor(Color.red);
-        graphics.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
-    }  
 }

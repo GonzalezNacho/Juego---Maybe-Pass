@@ -304,10 +304,8 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     		if (ninja.hayColision(pared)) {
         		if (ninja.hayColisionEnY(pared)) {
         			if (ninja.getPosicionY() < pared.getPosicionY()) {
-            			//ninja.setPosicionY(pared.getPosicionY()-ninja.getLargo()-1);
         				ninja.frenarEnEjeYPorAbajo(pared);
             		} else {
-            			//ninja.setPosicionY(pared.getPosicionY()+pared.getLargo()+1);
             			ninja.frenarEnEjeYPorArriba(pared);
             		}
         		} else {
