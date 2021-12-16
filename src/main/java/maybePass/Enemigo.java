@@ -1,7 +1,7 @@
 package maybePass;
 
 import java.awt.Color;
-import java.awt.Graphics;
+
 
 public abstract class Enemigo extends ElementoConImagen {
 
@@ -9,7 +9,5 @@ public abstract class Enemigo extends ElementoConImagen {
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
     }
-
-    public abstract void destruirse(Graphics graphics);
 
 }

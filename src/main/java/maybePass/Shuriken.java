@@ -52,15 +52,10 @@ public class Shuriken extends Enemigo {
              if (30 <= contador  && contador <= 40) {
             	 graphics.drawImage(img4, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
              }
-        	//graphics.drawImage(img1, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+        	
         } catch (Exception e1) {
             throw new RuntimeException(e1);
         }
-    }
-
-    public void destruirse(Graphics graphics) {
-        graphics.setColor(Color.red);
-        graphics.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
     }
 
 }

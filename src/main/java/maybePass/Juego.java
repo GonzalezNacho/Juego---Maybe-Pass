@@ -12,6 +12,11 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import niveles.Nivel;
+import niveles.Nivel1;
+import niveles.Nivel2;
+import niveles.Nivel3;
+
 // Implemento KeyListener para poder leer en los metodos keyPressed y keyReleased los codigos de tecla que apreto el usuario
 // Implemento Runnable para crear un Thread que ejecute en paralelo con mi programa
 public class Juego extends JPanel implements KeyListener, Runnable {
@@ -71,18 +76,18 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     
     private void obtenerNivel() {
     	if (numeroNivel ==1) {
-    		this.nivel = new Nivel1( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas,  paredes);
+    		this.nivel = new Nivel1(ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas,  paredes,Utilidades.obtenerRuta("imagenes/nivelUno.png"));
     	}else if (numeroNivel ==2) {
-    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  monedas,paredes);
+    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  monedas,paredes, Utilidades.obtenerRuta("imagenes/nivelDos.png"));
     	}else if (numeroNivel ==3) {
-    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes);
+    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes, Utilidades.obtenerRuta("imagenes/nivelTres.png"));
     	}
     }
 
     private void inicializarJuego() {
     	crearNivel();
     	monedasTexto.reiniciarContadorDeMonedas();
-    	this.vidas = new Vidas(10, 580,fuente, Color.blue, cantidadVidas);
+    	this.vidas = new Vidas(10, 580,fuente, Color.BLUE, cantidadVidas);
     }
 
 	private void obtenerDatosDelNivel(Nivel nivel) {
@@ -194,6 +199,7 @@ public class Juego extends JPanel implements KeyListener, Runnable {
 	        dibujarEnemigos(g);
 	        dibujarMonedas(g);
 	        dibujarParedes(g);
+	        nivel.numeroNivelDibujarse(g, 400 , 580, numeroNivel, fuente );
     	}
     	if (pantalla == PANTALLA_GANADOR) {
     		ganaste.dibujarse(g);
