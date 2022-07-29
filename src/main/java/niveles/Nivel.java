@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
 import java.util.List;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 import maybePass.ElementoBasico;
 import maybePass.ElementoInanimado;
@@ -29,11 +29,11 @@ public abstract class Nivel  {
 	private List<ElementoInanimado> paredes;
 	private List<Enemigo> enemigos;
 	private List<Moneda> monedas;
-	private String pathImagen;
+	//private String pathImagen;
 	private BufferedImage img;
 	
 	
-	public Nivel(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes, String path) {
+	public Nivel(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura,int anchoJuego, int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes, BufferedImage img) {
 		this.monedas = monedas;
 		this.anchoJuego = anchoJuego;
         this.largoJuego = largoJuego;
@@ -44,12 +44,13 @@ public abstract class Nivel  {
         this.enemigos = enemigos;
         this.enemigosPorLinea = 1;
         this.filasDeEnemigos= 7;
-        this.pathImagen = path;
-        try {
+        //this.pathImagen = path;
+        /*try {
         	this.img = ImageIO.read(new File(pathImagen));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
+        this.img = img;
 	}
 	
 	public abstract void agregarParedes();

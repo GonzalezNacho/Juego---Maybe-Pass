@@ -3,10 +3,10 @@ package maybePass;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
 //import java.nio.file.Paths;
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 
 public class Ninja extends ElementoConImagen {
@@ -23,14 +23,14 @@ public class Ninja extends ElementoConImagen {
     public Ninja(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Utilidades.obtenerRuta("imagenes/ninja.PNG");
-        String pathWalk1 = Utilidades.obtenerRuta("imagenes/walk1.PNG");
-        String pathWalk2 = Utilidades.obtenerRuta("imagenes/walk2.PNG");
-        String pathWalk3 = Utilidades.obtenerRuta("imagenes/walk3.PNG");
-        String pathWalk1izq = Utilidades.obtenerRuta("imagenes/walk1izq.PNG");
-        String pathWalk2izq = Utilidades.obtenerRuta("imagenes/walk2izq.PNG");
-        String pathWalk3izq = Utilidades.obtenerRuta("imagenes/walk3izq.PNG");
-        try {
+        img = Utilidades.obtenerRuta("/imagenes/ninja.PNG");
+        imgWalk1 = Utilidades.obtenerRuta("/imagenes/walk1.PNG");
+        imgWalk2 = Utilidades.obtenerRuta("/imagenes/walk2.PNG");
+        imgWalk3 = Utilidades.obtenerRuta("/imagenes/walk3.PNG");
+        imgWalk1izq = Utilidades.obtenerRuta("/imagenes/walk1izq.PNG");
+        imgWalk2izq = Utilidades.obtenerRuta("/imagenes/walk2izq.PNG");
+        imgWalk3izq = Utilidades.obtenerRuta("/imagenes/walk3izq.PNG");
+        /*try {
         	img = ImageIO.read(new File(path));
         	imgWalk1 = ImageIO.read(new File(pathWalk1));
         	imgWalk2 = ImageIO.read(new File(pathWalk2));
@@ -40,7 +40,7 @@ public class Ninja extends ElementoConImagen {
         	imgWalk3izq = ImageIO.read(new File(pathWalk3izq));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     public void dibujarse(Graphics graphics) {

@@ -2,11 +2,15 @@ package maybePass;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
+//import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
+//import java.net.URISyntaxException;
+//import java.nio.file.Paths;
+
+import javax.imageio.ImageIO;
+
 
 
 public class Utilidades {
@@ -68,19 +72,22 @@ public class Utilidades {
     	}
     }
     
-    public static String obtenerRuta(String pathRelativoDesdeResources) {
-    	boolean esLinux = System.getProperty("os.name").equals("Linux");
-    	String ruta = "";
-    	if (esLinux) {
+    public static BufferedImage obtenerRuta(String pathRelativoDesdeResources) {
+    	//boolean esLinux = System.getProperty("os.name").equals("Linux");
+    	//BufferedImage ruta = null;
+    	//if (esLinux) {
+    	System.out.println(pathRelativoDesdeResources);
     		try {
-				ruta = Paths.get(ElementoBasico.class.getClassLoader().getResource(pathRelativoDesdeResources).toURI()).toString();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
-    	} else {
-    		ruta = System.getProperty("user.dir") + "/src/main/resources/" + pathRelativoDesdeResources;
-    	}
-    	return ruta;
+    			return ImageIO.read(Utilidades.class.getResource(pathRelativoDesdeResources));
+				//ruta = Paths.get(ElementoBasico.class.getClassLoader().getResource(pathRelativoDesdeResources).toURI()).toString();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    			System.exit(1);
+    		}
+    	/*} else {
+    		ruta = ImageIO.read(Utilidades.class.getResource(pathRelativoDesdeResources));
+    	}*/
+    	return null;
     }
     
     public static Font cargarFuente() {
@@ -88,8 +95,9 @@ public class Utilidades {
     	String path = "src/main/resources/fuentes/lastninja.ttf";
     	try {
 			fuente = Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(20f);	
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(path)));	
+			//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			//ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(path)));
+			//ge.registerFont(fuente);
 			return fuente;
     	} catch (FontFormatException e) {
 			e.printStackTrace();

@@ -63,10 +63,10 @@ public class Juego extends JPanel implements KeyListener, Runnable {
         this.tiempoDeEsperaEntreActualizaciones = tiempoDeEsperaEntreActualizaciones;
         this.numeroNivel = numeroNivel;
         this.cantidadVidas = vidas;
-        this.portada = new Pantalla(anchoJuego, largoJuego, "imagenes/portada.PNG");
-        this.ganaste = new Pantalla(anchoJuego, largoJuego, "imagenes/ganaste.png");
-        this.perdiste = new Pantalla(anchoJuego, largoJuego, "imagenes/perdiste.png");
-        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "imagenes/siguiente-nivel.png");
+        this.portada = new Pantalla(anchoJuego, largoJuego, "/imagenes/portada.PNG");
+        this.ganaste = new Pantalla(anchoJuego, largoJuego, "/imagenes/ganaste.png");
+        this.perdiste = new Pantalla(anchoJuego, largoJuego, "/imagenes/perdiste.png");
+        this.siguienteNivel = new Pantalla(anchoJuego, largoJuego, "/imagenes/siguiente-nivel.png");
         this.fuente = Utilidades.cargarFuente();
         this.monedas = new ArrayList<Moneda>();
         this.monedasTexto = new Monedas(190, 580, fuente, Color.BLUE, cantidadMonedas);
@@ -76,11 +76,11 @@ public class Juego extends JPanel implements KeyListener, Runnable {
     
     private void obtenerNivel() {
     	if (numeroNivel ==1) {
-    		this.nivel = new Nivel1(ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas,  paredes,Utilidades.obtenerRuta("imagenes/nivelUno.png"));
+    		this.nivel = new Nivel1(ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas,  paredes,Utilidades.obtenerRuta("/imagenes/nivelUno.png"));
     	}else if (numeroNivel ==2) {
-    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  monedas,paredes, Utilidades.obtenerRuta("imagenes/nivelDos.png"));
+    		this.nivel = new Nivel2( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos,  monedas,paredes, Utilidades.obtenerRuta("/imagenes/nivelDos.png"));
     	}else if (numeroNivel ==3) {
-    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes, Utilidades.obtenerRuta("imagenes/nivelTres.png"));
+    		this.nivel = new Nivel3( ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes, Utilidades.obtenerRuta("/imagenes/nivelTres.png"));
     	}
     }
 

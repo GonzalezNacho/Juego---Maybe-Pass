@@ -3,10 +3,10 @@ package maybePass;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
 //import java.nio.file.Paths;
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 
 public class Shuriken extends Enemigo {
@@ -20,15 +20,10 @@ public class Shuriken extends Enemigo {
     public Shuriken(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo,
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
-        String path = Utilidades.obtenerRuta("imagenes/shuriken.PNG");
-        try {
-            img1 = ImageIO.read(new File(path));
-            img2 = rotarImagen(img1, 45);
-            img3 = rotarImagen(img1, 22);
-            img4 = rotarImagen(img1, 68);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        img1 = Utilidades.obtenerRuta("/imagenes/shuriken.PNG");
+		img2 = rotarImagen(img1, 45);
+		img3 = rotarImagen(img1, 22);
+		img4 = rotarImagen(img1, 68);
     }
     
     public void dibujarse(Graphics graphics) {

@@ -1,6 +1,7 @@
 package niveles;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import maybePass.ElementoBasico;
@@ -16,8 +17,8 @@ public class Nivel2 extends Nivel{
 	private int enemigosPorColumna;
 	
 	public Nivel2(Ninja ninja, ElementoBasico ubicacionInicial, ElementoBasico zonaSegura, int anchoJuego,
-			int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes, String path) {
-		super(ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes, path);
+			int largoJuego, List<Enemigo> enemigos, List<Moneda> monedas, List<ElementoInanimado> paredes, BufferedImage bufferedImage) {
+		super(ninja, ubicacionInicial, zonaSegura, anchoJuego, largoJuego, enemigos, monedas, paredes, bufferedImage);
 		this.enemigosPorColumna = 1;
         this.columnasDeEnemigos= 14;
 	}
