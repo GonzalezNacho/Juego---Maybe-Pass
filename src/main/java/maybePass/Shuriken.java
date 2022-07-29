@@ -3,10 +3,7 @@ package maybePass;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.IOException;
-//import java.nio.file.Paths;
-//import javax.imageio.ImageIO;
+
 
 
 public class Shuriken extends Enemigo {
@@ -52,5 +49,4 @@ public class Shuriken extends Enemigo {
             throw new RuntimeException(e1);
         }
     }
-
 }

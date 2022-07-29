@@ -3,10 +3,6 @@ package maybePass;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.IOException;
-//import java.nio.file.Paths;
-//import javax.imageio.ImageIO;
 
 
 public class Ninja extends ElementoConImagen {
@@ -30,17 +26,6 @@ public class Ninja extends ElementoConImagen {
         imgWalk1izq = Utilidades.obtenerRuta("/imagenes/walk1izq.PNG");
         imgWalk2izq = Utilidades.obtenerRuta("/imagenes/walk2izq.PNG");
         imgWalk3izq = Utilidades.obtenerRuta("/imagenes/walk3izq.PNG");
-        /*try {
-        	img = ImageIO.read(new File(path));
-        	imgWalk1 = ImageIO.read(new File(pathWalk1));
-        	imgWalk2 = ImageIO.read(new File(pathWalk2));
-        	imgWalk3 = ImageIO.read(new File(pathWalk3));
-        	imgWalk1izq = ImageIO.read(new File(pathWalk1izq));
-        	imgWalk2izq = ImageIO.read(new File(pathWalk2izq));
-        	imgWalk3izq = ImageIO.read(new File(pathWalk3izq));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 
     public void dibujarse(Graphics graphics) {
